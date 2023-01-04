@@ -297,6 +297,7 @@ namespace Macro_CNC
         private void btn_ok_Click(object sender, EventArgs e)
         {
             interfaceUsuario();
+            //comentario
             criarArquivo();
         }
     }
