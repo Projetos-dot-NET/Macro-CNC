@@ -7,6 +7,8 @@
     <Nullable>enable</Nullable>
     <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
+    <Platforms>AnyCPU;x86;ARM32</Platforms>
+    <Configurations>Debug;Release;32bits;X86</Configurations>
   </PropertyGroup>
 
   <ItemGroup>

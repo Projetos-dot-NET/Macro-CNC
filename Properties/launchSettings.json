@@ -1,0 +1,9 @@
+{
+  "profiles": {
+    "Macro CNC": {
+      "commandName": "Project",
+      "remoteDebugEnabled": false,
+      "hotReloadEnabled": true
+    }
+  }
+}

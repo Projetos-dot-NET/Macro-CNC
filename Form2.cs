@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 using System.IO;
+using System.Diagnostics;
 
 namespace Macro_CNC
 {
@@ -36,6 +37,7 @@ namespace Macro_CNC
         //Arquivo de escrita 
         public TextWriter arquivo;
 
+        
         public Form2()
         {
             InitializeComponent();
@@ -44,27 +46,70 @@ namespace Macro_CNC
         {
             try
             {
+
                 //Determino o diretorio onde será salvo o arquivo
-                string nome_arquivo = diretorio + "\\" + text_mome.Text + ".tap";// "\\textBox.txt";
+                string diretorioBkp = diretorio + "\\Backup";
+                string nome_arquivo = diretorio + "\\" + text_mome.Text + ".tap";
+                text_pasta.Text = diretorio; //+ "\\" + text_mome.Text + ".tap";
+                
+
+                //verificamos se o arquivo existe, se existir então deleta
+                if (File.Exists(nome_arquivo))
+                {
+                    //DialogResult resp = MessageBox.Show("Esse arquivo já existe, deseja apagar?", "Atenção", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                    //if (resp == DialogResult.OK)
+                    //{
+                        //File.Delete(nome_arquivo);
+                    //}
+                    //else
+                    //{
+                        if (!Directory.Exists(diretorioBkp))
+                        {
+
+                            //Criamos um com o nome Backup
+                            Directory.CreateDirectory(diretorioBkp);
+
+                        }
+                        var hora_atual = String.Format("{0}-{1}-{2}", DateTime.Now.Hour.ToString("00"), DateTime.Now.Minute.ToString("00"),DateTime.Now.Second.ToString("00"));
+                        //DateTime dataHora = DateTime.Now;
+                        File.Move(nome_arquivo, diretorioBkp + "\\" + text_mome.Text + "-" + hora_atual + ".tap");
+                    //}
+                    File.Delete(nome_arquivo);
+                }    
+                    
 
                 //verificamos se o arquivo existe, se não existir então criamos o arquivo
                 if (!File.Exists(nome_arquivo))
-                    File.Create(nome_arquivo).Close();
+                File.Create(nome_arquivo).Close();
+                
+                    
+
 
                 // crio a variavel responsável por gravar os dados no arquivo txt
                 arquivo = File.AppendText(nome_arquivo);
 
-                //Escrevo no arquivo txt os dados contidos no textbox
-                arquivo.Write(text_codigo.Text);
-
                 //Posiciono o ponteiro na próxima linha do arquivo.
-                arquivo.Write("\r\n");
-
-                MessageBox.Show("Codigo salvos com sucesso!!!","Salvar");
+                DialogResult result = MessageBox.Show("Deseja salvar o arquivo de CNC?", "Atenção",
+                MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
+                
+                if (result == DialogResult.OK)
+                {
+                    //Escrevo no arquivo txt os dados contidos no textbox
+                    arquivo.Write(text_codigo.Text);
+                    //Posiciono o ponteiro na próxima linha do arquivo.
+                    arquivo.Write("\r\n");
+                    //MessageBox.Show("Codigo salvos com sucesso!!!", "Salvar");
+                }
+                else
+                {
+                    arquivo.Close();
+                    File.Delete(nome_arquivo);
+                }
 
                 //Limpo textbox
                 //text_codigo.Text = string.Empty;
             }
+            
             catch (Exception ex)
             {
                 MessageBox.Show("Error: " + ex.Message);
@@ -86,6 +131,7 @@ namespace Macro_CNC
             //Indica o diretório raiz, a partir de onde a caixa de diálogo começará 
             //a exibição dos demais diretórios.
             folderDialog.RootFolder = Environment.SpecialFolder.MyComputer;
+            text_pasta.Text = folderDialog.SelectedPath;
 
             // elimina a condição de criar uma nova pasta ao abrir a caixa
             // de diálogo do browser
@@ -95,11 +141,26 @@ namespace Macro_CNC
             {
                 //Recupero o diretório da base de dados e o salvo na variavel diretorio
                 diretorio = folderDialog.SelectedPath;
+                
+                criarArquivo();
             }
 
         }
         private void btn_escreve_Click(object sender, EventArgs e)
         {
+
+            text_dist_x.Text = text_dist_x.Text.Replace(".",",");
+            text_dist_y.Text = text_dist_y.Text.Replace(".",",");
+            text_dia_fresa.Text = text_dia_fresa.Text.Replace(".",",");
+            text_av_vertical.Text = text_av_vertical.Text.Replace(".",",");
+            text_seg.Text = text_mergulho.Text.Replace(".", ",");
+            text_mergulho.Text = text_mergulho.Text.Replace(".", ",");
+            text_avanco.Text = text_avanco.Text.Replace(".", ",");
+            text_ajuste.Text = text_ajuste.Text.Replace(".", ",");
+            text_x.Text = text_x.Text.Replace(".", ",");
+            text_y.Text = text_y.Text.Replace(".", ",");
+            text_final_z.Text = text_final_z.Text.Replace(".", ",");
+            text_aprox_z.Text = text_aprox_z.Text.Replace(".", ",");
 
             //fazer o delocamento em X, Y e Z em segurança para a localização do bloco a usinar
             if (opc_mais.Checked == true && opc_externo.Checked == true)
@@ -297,8 +358,7 @@ namespace Macro_CNC
         private void btn_ok_Click(object sender, EventArgs e)
         {
             interfaceUsuario();
-            //comentario
-            criarArquivo();
         }
+
     }
 }

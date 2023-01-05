@@ -3,18 +3,48 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33205.214
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Macro CNC", "Macro CNC.csproj", "{621348F8-6F1E-4F5B-936A-13AA55E6AC06}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Macro CNC", "Macro CNC.csproj", "{621348F8-6F1E-4F5B-936A-13AA55E6AC06}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		32bits|Any CPU = 32bits|Any CPU
+		32bits|ARM32 = 32bits|ARM32
+		32bits|x86 = 32bits|x86
 		Debug|Any CPU = Debug|Any CPU
+		Debug|ARM32 = Debug|ARM32
+		Debug|x86 = Debug|x86
 		Release|Any CPU = Release|Any CPU
+		Release|ARM32 = Release|ARM32
+		Release|x86 = Release|x86
+		X86|Any CPU = X86|Any CPU
+		X86|ARM32 = X86|ARM32
+		X86|x86 = X86|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{621348F8-6F1E-4F5B-936A-13AA55E6AC06}.32bits|Any CPU.ActiveCfg = 32bits|Any CPU
+		{621348F8-6F1E-4F5B-936A-13AA55E6AC06}.32bits|Any CPU.Build.0 = 32bits|Any CPU
+		{621348F8-6F1E-4F5B-936A-13AA55E6AC06}.32bits|ARM32.ActiveCfg = 32bits|ARM32
+		{621348F8-6F1E-4F5B-936A-13AA55E6AC06}.32bits|ARM32.Build.0 = 32bits|ARM32
+		{621348F8-6F1E-4F5B-936A-13AA55E6AC06}.32bits|x86.ActiveCfg = 32bits|x86
+		{621348F8-6F1E-4F5B-936A-13AA55E6AC06}.32bits|x86.Build.0 = 32bits|x86
 		{621348F8-6F1E-4F5B-936A-13AA55E6AC06}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{621348F8-6F1E-4F5B-936A-13AA55E6AC06}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{621348F8-6F1E-4F5B-936A-13AA55E6AC06}.Debug|ARM32.ActiveCfg = Debug|ARM32
+		{621348F8-6F1E-4F5B-936A-13AA55E6AC06}.Debug|ARM32.Build.0 = Debug|ARM32
+		{621348F8-6F1E-4F5B-936A-13AA55E6AC06}.Debug|x86.ActiveCfg = Debug|x86
+		{621348F8-6F1E-4F5B-936A-13AA55E6AC06}.Debug|x86.Build.0 = Debug|x86
 		{621348F8-6F1E-4F5B-936A-13AA55E6AC06}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{621348F8-6F1E-4F5B-936A-13AA55E6AC06}.Release|Any CPU.Build.0 = Release|Any CPU
+		{621348F8-6F1E-4F5B-936A-13AA55E6AC06}.Release|ARM32.ActiveCfg = Release|ARM32
+		{621348F8-6F1E-4F5B-936A-13AA55E6AC06}.Release|ARM32.Build.0 = Release|ARM32
+		{621348F8-6F1E-4F5B-936A-13AA55E6AC06}.Release|x86.ActiveCfg = Release|x86
+		{621348F8-6F1E-4F5B-936A-13AA55E6AC06}.Release|x86.Build.0 = Release|x86
+		{621348F8-6F1E-4F5B-936A-13AA55E6AC06}.X86|Any CPU.ActiveCfg = X86|Any CPU
+		{621348F8-6F1E-4F5B-936A-13AA55E6AC06}.X86|Any CPU.Build.0 = X86|Any CPU
+		{621348F8-6F1E-4F5B-936A-13AA55E6AC06}.X86|ARM32.ActiveCfg = X86|ARM32
+		{621348F8-6F1E-4F5B-936A-13AA55E6AC06}.X86|ARM32.Build.0 = X86|ARM32
+		{621348F8-6F1E-4F5B-936A-13AA55E6AC06}.X86|x86.ActiveCfg = X86|x86
+		{621348F8-6F1E-4F5B-936A-13AA55E6AC06}.X86|x86.Build.0 = X86|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

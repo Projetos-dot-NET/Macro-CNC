@@ -87,6 +87,8 @@
             this.text_mome = new System.Windows.Forms.TextBox();
             this.label12 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
+            this.text_pasta = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -140,28 +142,28 @@
             // 
             this.text_x.Location = new System.Drawing.Point(148, 22);
             this.text_x.Name = "text_x";
-            this.text_x.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.text_x.Size = new System.Drawing.Size(52, 23);
             this.text_x.TabIndex = 3;
             this.text_x.Text = "120";
+            this.text_x.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // text_y
             // 
             this.text_y.Location = new System.Drawing.Point(148, 57);
             this.text_y.Name = "text_y";
-            this.text_y.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.text_y.Size = new System.Drawing.Size(52, 23);
             this.text_y.TabIndex = 4;
             this.text_y.Text = "60";
+            this.text_y.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // text_final_z
             // 
             this.text_final_z.Location = new System.Drawing.Point(148, 92);
             this.text_final_z.Name = "text_final_z";
-            this.text_final_z.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.text_final_z.Size = new System.Drawing.Size(52, 23);
             this.text_final_z.TabIndex = 5;
             this.text_final_z.Text = "8";
+            this.text_final_z.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // btn_cancela
             // 
@@ -185,16 +187,16 @@
             // 
             // text_codigo
             // 
-            this.text_codigo.Location = new System.Drawing.Point(288, 81);
+            this.text_codigo.Location = new System.Drawing.Point(288, 113);
             this.text_codigo.Multiline = true;
             this.text_codigo.Name = "text_codigo";
             this.text_codigo.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.text_codigo.Size = new System.Drawing.Size(338, 632);
+            this.text_codigo.Size = new System.Drawing.Size(338, 600);
             this.text_codigo.TabIndex = 12;
             // 
             // btn_escreve
             // 
-            this.btn_escreve.Location = new System.Drawing.Point(394, 12);
+            this.btn_escreve.Location = new System.Drawing.Point(405, 12);
             this.btn_escreve.Name = "btn_escreve";
             this.btn_escreve.Size = new System.Drawing.Size(100, 24);
             this.btn_escreve.TabIndex = 13;
@@ -265,19 +267,20 @@
             // 
             this.text_dist_y.Location = new System.Drawing.Point(148, 55);
             this.text_dist_y.Name = "text_dist_y";
-            this.text_dist_y.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.text_dist_y.Size = new System.Drawing.Size(52, 23);
             this.text_dist_y.TabIndex = 22;
             this.text_dist_y.Text = "0";
+            this.text_dist_y.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // text_dist_x
             // 
             this.text_dist_x.Location = new System.Drawing.Point(148, 22);
+            this.text_dist_x.Multiline = true;
             this.text_dist_x.Name = "text_dist_x";
-            this.text_dist_x.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.text_dist_x.Size = new System.Drawing.Size(52, 23);
             this.text_dist_x.TabIndex = 21;
             this.text_dist_x.Text = "0";
+            this.text_dist_x.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label6
             // 
@@ -375,10 +378,10 @@
             // 
             this.text_avanco.Location = new System.Drawing.Point(146, 212);
             this.text_avanco.Name = "text_avanco";
-            this.text_avanco.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.text_avanco.Size = new System.Drawing.Size(52, 23);
             this.text_avanco.TabIndex = 50;
             this.text_avanco.Text = "300";
+            this.text_avanco.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label11
             // 
@@ -462,10 +465,10 @@
             // 
             this.text_av_vertical.Location = new System.Drawing.Point(146, 107);
             this.text_av_vertical.Name = "text_av_vertical";
-            this.text_av_vertical.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.text_av_vertical.Size = new System.Drawing.Size(52, 23);
             this.text_av_vertical.TabIndex = 43;
             this.text_av_vertical.Text = "2";
+            this.text_av_vertical.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // Ajustes
             // 
@@ -505,19 +508,19 @@
             // 
             this.text_ajuste.Location = new System.Drawing.Point(141, 42);
             this.text_ajuste.Name = "text_ajuste";
-            this.text_ajuste.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.text_ajuste.Size = new System.Drawing.Size(52, 23);
             this.text_ajuste.TabIndex = 34;
             this.text_ajuste.Text = "0,0";
+            this.text_ajuste.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // text_mergulho
             // 
             this.text_mergulho.Location = new System.Drawing.Point(146, 178);
             this.text_mergulho.Name = "text_mergulho";
-            this.text_mergulho.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.text_mergulho.Size = new System.Drawing.Size(52, 23);
             this.text_mergulho.TabIndex = 38;
             this.text_mergulho.Text = "100";
+            this.text_mergulho.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label10
             // 
@@ -532,10 +535,10 @@
             // 
             this.text_seg.Location = new System.Drawing.Point(146, 143);
             this.text_seg.Name = "text_seg";
-            this.text_seg.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.text_seg.Size = new System.Drawing.Size(52, 23);
             this.text_seg.TabIndex = 36;
             this.text_seg.Text = "5";
+            this.text_seg.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label4
             // 
@@ -550,10 +553,10 @@
             // 
             this.text_dia_fresa.Location = new System.Drawing.Point(146, 73);
             this.text_dia_fresa.Name = "text_dia_fresa";
-            this.text_dia_fresa.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.text_dia_fresa.Size = new System.Drawing.Size(52, 23);
             this.text_dia_fresa.TabIndex = 32;
             this.text_dia_fresa.Text = "3,175";
+            this.text_dia_fresa.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label8
             // 
@@ -660,10 +663,10 @@
             // 
             this.text_aprox_z.Location = new System.Drawing.Point(148, 128);
             this.text_aprox_z.Name = "text_aprox_z";
-            this.text_aprox_z.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.text_aprox_z.Size = new System.Drawing.Size(52, 23);
             this.text_aprox_z.TabIndex = 13;
             this.text_aprox_z.Text = "3";
+            this.text_aprox_z.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // btn_Cab
             // 
@@ -677,7 +680,7 @@
             // 
             // btn_Rod
             // 
-            this.btn_Rod.Location = new System.Drawing.Point(500, 12);
+            this.btn_Rod.Location = new System.Drawing.Point(524, 12);
             this.btn_Rod.Name = "btn_Rod";
             this.btn_Rod.Size = new System.Drawing.Size(100, 24);
             this.btn_Rod.TabIndex = 34;
@@ -687,18 +690,16 @@
             // 
             // text_mome
             // 
-            this.text_mome.Location = new System.Drawing.Point(394, 56);
+            this.text_mome.Location = new System.Drawing.Point(394, 86);
             this.text_mome.Name = "text_mome";
-            this.text_mome.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.text_mome.Size = new System.Drawing.Size(180, 23);
             this.text_mome.TabIndex = 35;
-            this.text_mome.Text = "Nome_Arquivo";
-            this.text_mome.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.text_mome.Text = "Contorno1";
             // 
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(287, 60);
+            this.label12.Location = new System.Drawing.Point(287, 90);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(103, 15);
             this.label12.TabIndex = 23;
@@ -707,18 +708,37 @@
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(576, 59);
+            this.label13.Location = new System.Drawing.Point(576, 91);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(27, 15);
             this.label13.TabIndex = 36;
             this.label13.Text = ".tap";
             this.label13.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(287, 60);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(38, 15);
+            this.label14.TabIndex = 37;
+            this.label14.Text = "Pasta:";
+            // 
+            // text_pasta
+            // 
+            this.text_pasta.Location = new System.Drawing.Point(331, 56);
+            this.text_pasta.Name = "text_pasta";
+            this.text_pasta.Size = new System.Drawing.Size(292, 23);
+            this.text_pasta.TabIndex = 38;
+            this.text_pasta.Text = "Selecione o caminho no botão salvar";
+            // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(635, 716);
+            this.Controls.Add(this.label14);
+            this.Controls.Add(this.text_pasta);
             this.Controls.Add(this.label13);
             this.Controls.Add(this.label12);
             this.Controls.Add(this.text_mome);
@@ -826,5 +846,7 @@
         private Label label11;
         private PictureBox pictureBox15;
         private PictureBox pictureBox14;
+        private Label label14;
+        private TextBox text_pasta;
     }
 }
