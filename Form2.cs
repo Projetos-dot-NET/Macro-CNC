@@ -42,7 +42,7 @@ namespace Macro_CNC
         {
             InitializeComponent();
         }
-        public void criarArquivo()
+        public void criarArquivo() //Rotina para salvar o arquivo para o CNC
         {
             try
             {
@@ -121,12 +121,11 @@ namespace Macro_CNC
             }
         }
 
-
-        public void interfaceUsuario()
+        public void interfaceUsuario(Boolean st) //Rotina para preparar a interface para selecionar a pasta a ser gravada
         {
 
             // titulo a caixa de diágolo do browser que será aberta
-            folderDialog.Description = "Selecione o Diretório a ser pesquisado:";
+            folderDialog.Description = "Selecione o Caminho para Salvar o Arquivo:";
 
             //Indica o diretório raiz, a partir de onde a caixa de diálogo começará 
             //a exibição dos demais diretórios.
@@ -141,12 +140,16 @@ namespace Macro_CNC
             {
                 //Recupero o diretório da base de dados e o salvo na variavel diretorio
                 diretorio = folderDialog.SelectedPath;
+                if (st == true)
+                {
+                    criarArquivo();
+                }
                 
-                criarArquivo();
             }
 
         }
-        private void btn_escreve_Click(object sender, EventArgs e)
+        
+        private void btn_escreve_Click(object sender, EventArgs e) //Rotina para escrever o codigo CNC de usinagem
         {
 
             text_dist_x.Text = text_dist_x.Text.Replace(".",",");
@@ -329,12 +332,12 @@ namespace Macro_CNC
             text_codigo.Text = text_codigo.Text.Replace(",", ".");
         }
 
-        private void btn_cancela_Click(object sender, EventArgs e)
+        private void btn_cancela_Click(object sender, EventArgs e) // Rotina para fechar o App
         {
             this.Close();
         }
 
-        private void btn_Cab_Click(object sender, EventArgs e)
+        private void btn_Cab_Click(object sender, EventArgs e) //Rotina para escrever o Cabeçalho para Mach3
         {
             text_codigo.Text = "G17 G21 G90 (Plano XY - metrico - absoluto)" + Environment.NewLine;
             text_codigo.Text = text_codigo.Text + "G0 Z25.000 (25mm de seguranca)" + Environment.NewLine;
@@ -346,7 +349,7 @@ namespace Macro_CNC
             text_codigo.Text = text_codigo.Text + "G0 Z5.000 (Aproximacao de 5mm )" + Environment.NewLine;
         }
 
-        private void btn_Rod_Click(object sender, EventArgs e)
+        private void btn_Rod_Click(object sender, EventArgs e) //Rotina para escrever o Rodapé para Mach3
         {
             text_codigo.Text = text_codigo.Text + "G0 Z25.000 " + Environment.NewLine;
             text_codigo.Text = text_codigo.Text + "M5" + Environment.NewLine;
@@ -354,11 +357,24 @@ namespace Macro_CNC
             text_codigo.Text = text_codigo.Text + "M30" + Environment.NewLine;
         }
 
-
-        private void btn_ok_Click(object sender, EventArgs e)
+        private void btn_ok_Click(object sender, EventArgs e) //Chamada da interface pelo botão de salvar
         {
-            interfaceUsuario();
+           if(text_pasta.Text == "Selecione o caminho no botão salvar")
+            {
+                interfaceUsuario(true);
+            }
+           else
+            { 
+                diretorio = folderDialog.SelectedPath;
+                criarArquivo();
+            }
+            
         }
 
+        private void button1_Click(object sender, EventArgs e)
+        {
+            interfaceUsuario(false);
+            text_pasta.Text = diretorio;
+        }
     }
 }

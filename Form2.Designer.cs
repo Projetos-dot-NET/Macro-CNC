@@ -89,6 +89,7 @@
             this.label13 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.text_pasta = new System.Windows.Forms.TextBox();
+            this.button1 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -728,15 +729,26 @@
             // 
             this.text_pasta.Location = new System.Drawing.Point(331, 56);
             this.text_pasta.Name = "text_pasta";
-            this.text_pasta.Size = new System.Drawing.Size(292, 23);
+            this.text_pasta.Size = new System.Drawing.Size(265, 23);
             this.text_pasta.TabIndex = 38;
             this.text_pasta.Text = "Selecione o caminho no botão salvar";
+            // 
+            // button1
+            // 
+            this.button1.Image = ((System.Drawing.Image)(resources.GetObject("button1.Image")));
+            this.button1.Location = new System.Drawing.Point(597, 50);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(36, 32);
+            this.button1.TabIndex = 39;
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(635, 716);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.label14);
             this.Controls.Add(this.text_pasta);
             this.Controls.Add(this.label13);
@@ -848,5 +860,6 @@
         private PictureBox pictureBox14;
         private Label label14;
         private TextBox text_pasta;
+        private Button button1;
     }
 }
