@@ -11,6 +11,7 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 using System.IO;
 using System.Diagnostics;
+using Macro_CNC.Classes;
 
 namespace Macro_CNC
 {
@@ -339,22 +340,12 @@ namespace Macro_CNC
 
         private void btn_Cab_Click(object sender, EventArgs e) //Rotina para escrever o Cabeçalho para Mach3
         {
-            text_codigo.Text = "G17 G21 G90 (Plano XY - metrico - absoluto)" + Environment.NewLine;
-            text_codigo.Text = text_codigo.Text + "G0 Z25.000 (25mm de seguranca)" + Environment.NewLine;
-            text_codigo.Text = text_codigo.Text + "G0 X0.000 Y0.000 (zero peca)" + Environment.NewLine;
-            text_codigo.Text = text_codigo.Text + "S12000 (velocidade spidle)" + Environment.NewLine;
-            text_codigo.Text = text_codigo.Text + "M0 (troca manual de ferramenta)" + Environment.NewLine;
-            text_codigo.Text = text_codigo.Text + "M3 (liga spindle)" + Environment.NewLine;
-            text_codigo.Text = text_codigo.Text + "G4 P3000 (pausa por 3 segundos)" + Environment.NewLine;
-            text_codigo.Text = text_codigo.Text + "G0 Z5.000 (Aproximacao de 5mm )" + Environment.NewLine;
+            text_codigo.Text = Comandos.InserirCabecalho();
         }
 
         private void btn_Rod_Click(object sender, EventArgs e) //Rotina para escrever o Rodapé para Mach3
         {
-            text_codigo.Text = text_codigo.Text + "G0 Z25.000 " + Environment.NewLine;
-            text_codigo.Text = text_codigo.Text + "M5" + Environment.NewLine;
-            text_codigo.Text = text_codigo.Text + "G0 X0.000 Y0.000" + Environment.NewLine;
-            text_codigo.Text = text_codigo.Text + "M30" + Environment.NewLine;
+            text_codigo.Text += Comandos.InserirRodape();
         }
 
         private void btn_ok_Click(object sender, EventArgs e) //Chamada da interface pelo botão de salvar
