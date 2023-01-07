@@ -43,14 +43,16 @@ namespace Contorno_Circular
             text_aprox_z.Text = text_aprox_z.Text.Replace(".", ",");
 
             //Cabeçalho
+            z = Convert.ToDecimal(text_troca.Text);
             text_comando.Text = "G17 G21 G90 (Plano XY - metrico - absoluto)" + Environment.NewLine;
+            text_comando.Text = text_comando.Text + "G0 Z" + Math.Round(z, 4) + Environment.NewLine;
             text_comando.Text = text_comando.Text + "G0 X0.000 Y0.000 (zero peca)" + Environment.NewLine;
             text_comando.Text = text_comando.Text + "S12000 (velocidade spidle)" + Environment.NewLine;
             text_comando.Text = text_comando.Text + "M0 (troca manual de ferramenta)" + Environment.NewLine;
             text_comando.Text = text_comando.Text + "M3 (liga spindle)" + Environment.NewLine;
             text_comando.Text = text_comando.Text + "G4 P3.000 (pausa por 3 segundos)" + Environment.NewLine;
             z = Convert.ToDecimal(text_seg.Text);
-            text_comando.Text = text_comando.Text + "G0 Z" + z +" (Aproximacao de 5mm )" + Environment.NewLine;
+            text_comando.Text = text_comando.Text + "G0 Z" + Math.Round(z,4) +" (Aproximacao de 5mm )" + Environment.NewLine;
             
             //Movimentos
             x = (Convert.ToDecimal(text_x.Text) + (Convert.ToDecimal(text_dia.Text)/2) - 
