@@ -34,7 +34,7 @@ namespace ContornoRetangular
         {
             InitializeComponent();
         }
-        private void criarArquivo() //Rotina para salvar o arquivo para o CNC
+        private void CriarArquivo() //Rotina para salvar o arquivo para o CNC
         {
             try
             {
@@ -48,13 +48,6 @@ namespace ContornoRetangular
                 //verificamos se o arquivo existe, se existir então deleta
                 if (File.Exists(nome_arquivo))
                 {
-                    //DialogResult resp = MessageBox.Show("Esse arquivo já existe, deseja apagar?", "Atenção", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-                    //if (resp == DialogResult.OK)
-                    //{
-                        //File.Delete(nome_arquivo);
-                    //}
-                    //else
-                    //{
                         if (!Directory.Exists(diretorioBkp))
                         {
 
@@ -63,9 +56,9 @@ namespace ContornoRetangular
 
                         }
                         var hora_atual = String.Format("{0}-{1}-{2}", DateTime.Now.Hour.ToString("00"), DateTime.Now.Minute.ToString("00"),DateTime.Now.Second.ToString("00"));
-                        //DateTime dataHora = DateTime.Now;
+
                         File.Move(nome_arquivo, diretorioBkp + "\\" + text_mome.Text + "-" + hora_atual + ".tap");
-                    //}
+
                     File.Delete(nome_arquivo);
                 }    
                     
@@ -98,8 +91,6 @@ namespace ContornoRetangular
                     File.Delete(nome_arquivo);
                 }
 
-                //Limpo textbox
-                //text_codigo.Text = string.Empty;
             }
             
             catch (Exception ex)
@@ -134,7 +125,7 @@ namespace ContornoRetangular
                 diretorio = folderDialog.SelectedPath;
                 if (st == true)
                 {
-                    criarArquivo();
+                    CriarArquivo();
                 }
                 
             }
@@ -354,7 +345,7 @@ namespace ContornoRetangular
            else
             { 
                 diretorio = folderDialog.SelectedPath;
-                criarArquivo();
+                CriarArquivo();
             }
             
         }

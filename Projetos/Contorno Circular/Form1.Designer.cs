@@ -67,6 +67,9 @@
             this.pictureBox11 = new System.Windows.Forms.PictureBox();
             this.pictureBox9 = new System.Windows.Forms.PictureBox();
             this.pictureBox10 = new System.Windows.Forms.PictureBox();
+            this.pictureBox12 = new System.Windows.Forms.PictureBox();
+            this.label11 = new System.Windows.Forms.Label();
+            this.text_troca = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -81,6 +84,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox11)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox9)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox10)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox12)).BeginInit();
             this.SuspendLayout();
             // 
             // pictureBox1
@@ -171,12 +175,12 @@
             this.text_comando.Multiline = true;
             this.text_comando.Name = "text_comando";
             this.text_comando.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.text_comando.Size = new System.Drawing.Size(364, 677);
+            this.text_comando.Size = new System.Drawing.Size(364, 702);
             this.text_comando.TabIndex = 9;
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(12, 692);
+            this.button1.Location = new System.Drawing.Point(12, 717);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(80, 28);
             this.button1.TabIndex = 10;
@@ -185,7 +189,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(191, 692);
+            this.button2.Location = new System.Drawing.Point(191, 717);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(80, 28);
             this.button2.TabIndex = 11;
@@ -428,6 +432,9 @@
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.pictureBox12);
+            this.groupBox3.Controls.Add(this.label11);
+            this.groupBox3.Controls.Add(this.text_troca);
             this.groupBox3.Controls.Add(this.pictureBox11);
             this.groupBox3.Controls.Add(this.pictureBox9);
             this.groupBox3.Controls.Add(this.pictureBox10);
@@ -439,7 +446,7 @@
             this.groupBox3.Controls.Add(this.label3);
             this.groupBox3.Location = new System.Drawing.Point(12, 540);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(259, 139);
+            this.groupBox3.Size = new System.Drawing.Size(259, 171);
             this.groupBox3.TabIndex = 21;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Movimentação:";
@@ -477,11 +484,40 @@
             this.pictureBox10.TabIndex = 30;
             this.pictureBox10.TabStop = false;
             // 
+            // pictureBox12
+            // 
+            this.pictureBox12.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox12.Image")));
+            this.pictureBox12.InitialImage = null;
+            this.pictureBox12.Location = new System.Drawing.Point(209, 135);
+            this.pictureBox12.Name = "pictureBox12";
+            this.pictureBox12.Size = new System.Drawing.Size(38, 35);
+            this.pictureBox12.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox12.TabIndex = 35;
+            this.pictureBox12.TabStop = false;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(34, 142);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(94, 13);
+            this.label11.TabIndex = 34;
+            this.label11.Text = "Troca Ferramenta:";
+            // 
+            // text_troca
+            // 
+            this.text_troca.Location = new System.Drawing.Point(143, 139);
+            this.text_troca.Name = "text_troca";
+            this.text_troca.Size = new System.Drawing.Size(60, 20);
+            this.text_troca.TabIndex = 33;
+            this.text_troca.Text = "25";
+            this.text_troca.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(653, 729);
+            this.ClientSize = new System.Drawing.Size(653, 757);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
@@ -510,6 +546,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox11)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox9)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox10)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox12)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -555,6 +592,9 @@
         private System.Windows.Forms.PictureBox pictureBox11;
         private System.Windows.Forms.PictureBox pictureBox9;
         private System.Windows.Forms.PictureBox pictureBox10;
+        private System.Windows.Forms.PictureBox pictureBox12;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.TextBox text_troca;
     }
 }
 
