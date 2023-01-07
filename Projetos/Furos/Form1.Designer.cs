@@ -94,6 +94,7 @@
             this.groupBox7 = new System.Windows.Forms.GroupBox();
             this.check_rot = new System.Windows.Forms.CheckBox();
             this.button5 = new System.Windows.Forms.Button();
+            this.pictureBox14 = new System.Windows.Forms.PictureBox();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -114,6 +115,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox11)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox12)).BeginInit();
             this.groupBox7.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox14)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -768,6 +770,7 @@
             // 
             // groupBox7
             // 
+            this.groupBox7.Controls.Add(this.pictureBox14);
             this.groupBox7.Controls.Add(this.check_rot);
             this.groupBox7.Controls.Add(this.button5);
             this.groupBox7.Controls.Add(this.label13);
@@ -791,6 +794,7 @@
             this.check_rot.TabIndex = 21;
             this.check_rot.Text = "Rotacionar em  90°";
             this.check_rot.UseVisualStyleBackColor = true;
+            this.check_rot.CheckedChanged += new System.EventHandler(this.check_rot_CheckedChanged);
             // 
             // button5
             // 
@@ -802,11 +806,24 @@
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
+            // pictureBox14
+            // 
+            this.pictureBox14.ErrorImage = null;
+            this.pictureBox14.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox14.Image")));
+            this.pictureBox14.InitialImage = null;
+            this.pictureBox14.Location = new System.Drawing.Point(11, 78);
+            this.pictureBox14.Name = "pictureBox14";
+            this.pictureBox14.Size = new System.Drawing.Size(53, 49);
+            this.pictureBox14.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox14.TabIndex = 26;
+            this.pictureBox14.TabStop = false;
+            this.pictureBox14.Visible = false;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(595, 815);
+            this.ClientSize = new System.Drawing.Size(807, 815);
             this.Controls.Add(this.groupBox7);
             this.Controls.Add(this.groupBox6);
             this.Controls.Add(this.pictureBox8);
@@ -846,6 +863,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox12)).EndInit();
             this.groupBox7.ResumeLayout(false);
             this.groupBox7.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox14)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -918,6 +936,7 @@
         private System.Windows.Forms.Button button8;
         private System.Windows.Forms.CheckBox check_rot;
         private System.Windows.Forms.Button button9;
+        private System.Windows.Forms.PictureBox pictureBox14;
     }
 }
 

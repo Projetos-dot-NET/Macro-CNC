@@ -48,7 +48,7 @@ namespace Furos
             text_comando.Text = text_comando.Text + "G0 Z" + Math.Round(z, 4) + " (Z para troca de ferramenta )" + Environment.NewLine;
             text_comando.Text = text_comando.Text + "G0 X0.000 Y0.000 (zero peca)" + Environment.NewLine;
             text_comando.Text = text_comando.Text + "S12000 (velocidade spidle)" + Environment.NewLine;
-            text_comando.Text = text_comando.Text + "M0 (troca manual de ferramenta)" + Environment.NewLine;
+            text_comando.Text = text_comando.Text + "M0 (broca de " + text_dia_f.Text + "mm, troca manual)" + Environment.NewLine;
             text_comando.Text = text_comando.Text + "M3 (liga spindle)" + Environment.NewLine;
             text_comando.Text = text_comando.Text + "G4 P3.000 (pausa por 3 segundos)" + Environment.NewLine;
             z = Convert.ToDecimal(text_seg.Text);
@@ -260,6 +260,24 @@ namespace Furos
             {
                 list_brocas.Items.RemoveAt(list_brocas.SelectedIndices[f]);
             }
+        }
+
+
+        private void check_rot_CheckedChanged(object sender, EventArgs e)
+        {
+            if (check_rot.Checked == true)
+            {
+                pictureBox14.Location = new Point(11, 79);
+                pictureBox12.Visible = false;
+                pictureBox14.Visible = true;
+            }
+            else
+            {
+                pictureBox12.Location = new Point(11, 79);
+                pictureBox12.Visible = true;
+                pictureBox14.Visible = false;
+            }
+            
         }
     }
 }
