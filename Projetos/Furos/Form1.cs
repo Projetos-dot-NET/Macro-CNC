@@ -69,43 +69,9 @@ namespace Furos
         {
             text_x.Text = text_x.Text.Replace(",", ".");
             text_y.Text = text_y.Text.Replace(",", ".");
-            list_brocas.Items.Add(" X" + text_x.Text + " Y" + text_y.Text );
+            list_brocas.Items.Add(" X" + text_x.Text + " Y" + text_y.Text);
         }
 
-        private void button3_Click(object sender, EventArgs e)
-        {
-            if (list_brocas.Items.Count > 0)
-            {
-                if (s == true)
-                {
-                    DialogResult Result = MessageBox.Show("Deseja apagar Item selecionado da lista", "Atenção",
-                    MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-                    if (Result == DialogResult.Yes)
-                    {
-                        list_brocas.Items.Remove(list_brocas.SelectedItem);
-                    }
-
-                    for (int f = 0; f < list_brocas.Items.Count; f++)
-                    {
-                        if (list_brocas.GetSelected(f))
-                        {
-                            list_brocas.SetSelected(f, false);
-                            f = list_brocas.Items.Count;
-                        }
-                    }
-                    s = false;
-                }
-                else
-                {
-                    MessageBox.Show("Favor selecionar um item", "Atenção");
-                }
-            }
-            else
-            {
-                MessageBox.Show("Não existe nenhum Item na lista", "Atenção");
-            }
-
-        }
 
         private void button2_Click(object sender, EventArgs e)
         {
@@ -126,10 +92,10 @@ namespace Furos
             }
             else
             {
-                MessageBox.Show("Preencha a lista de furação por favor","Atenção");
+                MessageBox.Show("Preencha a lista de furação por favor", "Atenção");
                 return;
             }
-            
+
             z = Convert.ToDecimal(text_final_z.Text);
             z_mergulho = Convert.ToDecimal(text_mergulho.Text);
             retracao = Convert.ToDecimal(text_retracao.Text);
@@ -138,9 +104,9 @@ namespace Furos
             {
                 text_comando.Text = text_comando.Text + "G82 " + list_brocas.Items[0].ToString() + " Z-" + Math.Round(z, 4) +
                         " F" + Math.Round(z_mergulho, 4) + " R" + Math.Round(retracao, 4) + " P" + 1 + Environment.NewLine;
-                for (int f=1; f < list_brocas.Items.Count ; f++)
+                for (int f = 1; f < list_brocas.Items.Count; f++)
                 {
-                    text_comando.Text = text_comando.Text + "G82 " + list_brocas.Items[f].ToString() + Environment.NewLine; 
+                    text_comando.Text = text_comando.Text + "G82 " + list_brocas.Items[f].ToString() + Environment.NewLine;
                 }
             }
             else
@@ -178,7 +144,7 @@ namespace Furos
             for (l = 0; l < quantidade_y; l++)
             {
                 for (c = 0; c < quantidade_x; c++)
-                { 
+                {
                     list_brocas.Items.Add(" X" + Math.Round(x, 4) + " Y" + Math.Round(y, 4));
                     x = x + Convert.ToDecimal(text_inter_x.Text);
                 }
@@ -259,36 +225,38 @@ namespace Furos
 
         private void button5_Click(object sender, EventArgs e)
         {
-            //Math.PI;
-            int AngIni=0;
-            int AngFim=360;
-            double X1 = 0;
-            double Y1 = 0;
-            int X = 0;
-            int Y = 0;
-            int f = 0;
+            int AngIni = 0;
+            int AngFim = 360;
+            decimal X1;
+            decimal Y1;
+            decimal X = Convert.ToDecimal(text_x.Text);
+            decimal Y = Convert.ToDecimal(text_x.Text);
+            double f;
+            decimal raio = Convert.ToDecimal(text_raio.Text);
+            double n_furos = 360 / Convert.ToDouble(text_quant.Text);
+
+            list_brocas.Items.Clear();
 
             if (check_rot.Checked == true)
             {
                 AngIni = 90;
                 AngFim = 450;
             }
-                for (f = AngIni; f < AngFim; f+=60) 
+            f = AngIni;
+            while (f < AngFim)
             {
-                
                 {
-                    X1 = X + Math.Cos(f * Math.PI / 180) * 50;
-                    Y1 = Y + Math.Sin((180 - f) * Math.PI / 180) * 50;
+                    X1 = X + Convert.ToDecimal(Math.Cos(f * (Math.PI) / 180)) * raio;
+                    Y1 = Y + Convert.ToDecimal(Math.Sin((180 - f) * (Math.PI) / 180)) * raio;
                     list_brocas.Items.Add(" X" + Math.Round(X1, 4) + " Y" + Math.Round(Y1, 4));
                 }
-
+                f += n_furos;
             }
-
         }
 
         private void button9_Click(object sender, EventArgs e)
         {
-            for (int f = list_brocas.SelectedIndices.Count - 1; f>=0; f--)
+            for (int f = list_brocas.SelectedIndices.Count - 1; f >= 0; f--)
             {
                 list_brocas.Items.RemoveAt(list_brocas.SelectedIndices[f]);
             }

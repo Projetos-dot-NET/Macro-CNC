@@ -39,7 +39,10 @@
             this.label1 = new System.Windows.Forms.Label();
             this.list_brocas = new System.Windows.Forms.ListBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.button3 = new System.Windows.Forms.Button();
+            this.button9 = new System.Windows.Forms.Button();
+            this.button8 = new System.Windows.Forms.Button();
+            this.button7 = new System.Windows.Forms.Button();
+            this.button6 = new System.Windows.Forms.Button();
             this.text_comando = new System.Windows.Forms.TextBox();
             this.button2 = new System.Windows.Forms.Button();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
@@ -83,18 +86,14 @@
             this.label3 = new System.Windows.Forms.Label();
             this.text_q_x = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
-            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.text_quant = new System.Windows.Forms.TextBox();
             this.label12 = new System.Windows.Forms.Label();
-            this.textBox4 = new System.Windows.Forms.TextBox();
+            this.text_raio = new System.Windows.Forms.TextBox();
             this.label13 = new System.Windows.Forms.Label();
             this.pictureBox12 = new System.Windows.Forms.PictureBox();
             this.groupBox7 = new System.Windows.Forms.GroupBox();
-            this.button5 = new System.Windows.Forms.Button();
-            this.button6 = new System.Windows.Forms.Button();
-            this.button7 = new System.Windows.Forms.Button();
-            this.button8 = new System.Windows.Forms.Button();
             this.check_rot = new System.Windows.Forms.CheckBox();
-            this.button9 = new System.Windows.Forms.Button();
+            this.button5 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -159,7 +158,7 @@
             this.text_y.Name = "text_y";
             this.text_y.Size = new System.Drawing.Size(51, 20);
             this.text_y.TabIndex = 4;
-            this.text_y.Text = "15";
+            this.text_y.Text = "0";
             this.text_y.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label2
@@ -188,7 +187,7 @@
             this.text_x.Name = "text_x";
             this.text_x.Size = new System.Drawing.Size(51, 20);
             this.text_x.TabIndex = 1;
-            this.text_x.Text = "20";
+            this.text_x.Text = "0";
             this.text_x.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label1
@@ -217,7 +216,6 @@
             this.groupBox2.Controls.Add(this.button8);
             this.groupBox2.Controls.Add(this.button7);
             this.groupBox2.Controls.Add(this.button6);
-            this.groupBox2.Controls.Add(this.button3);
             this.groupBox2.Controls.Add(this.list_brocas);
             this.groupBox2.Location = new System.Drawing.Point(10, 247);
             this.groupBox2.Name = "groupBox2";
@@ -226,16 +224,45 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Lista de furos:";
             // 
-            // button3
+            // button9
             // 
-            this.button3.Location = new System.Drawing.Point(13, 19);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(87, 22);
-            this.button3.TabIndex = 7;
-            this.button3.Text = "&Apagar item";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Visible = false;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
+            this.button9.Location = new System.Drawing.Point(13, 20);
+            this.button9.Name = "button9";
+            this.button9.Size = new System.Drawing.Size(87, 22);
+            this.button9.TabIndex = 11;
+            this.button9.Text = "&Apagar item";
+            this.button9.UseVisualStyleBackColor = true;
+            this.button9.Click += new System.EventHandler(this.button9_Click);
+            // 
+            // button8
+            // 
+            this.button8.Image = ((System.Drawing.Image)(resources.GetObject("button8.Image")));
+            this.button8.Location = new System.Drawing.Point(111, 19);
+            this.button8.Name = "button8";
+            this.button8.Size = new System.Drawing.Size(23, 23);
+            this.button8.TabIndex = 10;
+            this.button8.UseVisualStyleBackColor = true;
+            this.button8.Click += new System.EventHandler(this.button8_Click);
+            // 
+            // button7
+            // 
+            this.button7.Image = ((System.Drawing.Image)(resources.GetObject("button7.Image")));
+            this.button7.Location = new System.Drawing.Point(111, 48);
+            this.button7.Name = "button7";
+            this.button7.Size = new System.Drawing.Size(23, 23);
+            this.button7.TabIndex = 9;
+            this.button7.UseVisualStyleBackColor = true;
+            this.button7.Click += new System.EventHandler(this.button7_Click);
+            // 
+            // button6
+            // 
+            this.button6.Location = new System.Drawing.Point(13, 114);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(87, 22);
+            this.button6.TabIndex = 8;
+            this.button6.Text = "&Apagar Lista";
+            this.button6.UseVisualStyleBackColor = true;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
             // text_comando
             // 
@@ -689,14 +716,14 @@
             this.label11.Text = "X:";
             this.label11.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // textBox3
+            // text_quant
             // 
-            this.textBox3.Location = new System.Drawing.Point(163, 59);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(51, 20);
-            this.textBox3.TabIndex = 12;
-            this.textBox3.Text = "6";
-            this.textBox3.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.text_quant.Location = new System.Drawing.Point(163, 59);
+            this.text_quant.Name = "text_quant";
+            this.text_quant.Size = new System.Drawing.Size(51, 20);
+            this.text_quant.TabIndex = 12;
+            this.text_quant.Text = "6";
+            this.text_quant.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label12
             // 
@@ -708,14 +735,14 @@
             this.label12.Text = "Quantidade:";
             this.label12.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // textBox4
+            // text_raio
             // 
-            this.textBox4.Location = new System.Drawing.Point(163, 36);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(51, 20);
-            this.textBox4.TabIndex = 10;
-            this.textBox4.Text = "15";
-            this.textBox4.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.text_raio.Location = new System.Drawing.Point(163, 36);
+            this.text_raio.Name = "text_raio";
+            this.text_raio.Size = new System.Drawing.Size(51, 20);
+            this.text_raio.TabIndex = 10;
+            this.text_raio.Text = "15";
+            this.text_raio.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label13
             // 
@@ -745,55 +772,15 @@
             this.groupBox7.Controls.Add(this.button5);
             this.groupBox7.Controls.Add(this.label13);
             this.groupBox7.Controls.Add(this.pictureBox12);
-            this.groupBox7.Controls.Add(this.textBox4);
+            this.groupBox7.Controls.Add(this.text_raio);
             this.groupBox7.Controls.Add(this.label12);
-            this.groupBox7.Controls.Add(this.textBox3);
+            this.groupBox7.Controls.Add(this.text_quant);
             this.groupBox7.Location = new System.Drawing.Point(363, 13);
             this.groupBox7.Name = "groupBox7";
             this.groupBox7.Size = new System.Drawing.Size(220, 141);
             this.groupBox7.TabIndex = 25;
             this.groupBox7.TabStop = false;
             this.groupBox7.Text = "Matriz Circular";
-            // 
-            // button5
-            // 
-            this.button5.Location = new System.Drawing.Point(6, 17);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(64, 25);
-            this.button5.TabIndex = 20;
-            this.button5.Text = "&Adicionar";
-            this.button5.UseVisualStyleBackColor = true;
-            this.button5.Click += new System.EventHandler(this.button5_Click);
-            // 
-            // button6
-            // 
-            this.button6.Location = new System.Drawing.Point(13, 114);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(87, 22);
-            this.button6.TabIndex = 8;
-            this.button6.Text = "&Apagar Lista";
-            this.button6.UseVisualStyleBackColor = true;
-            this.button6.Click += new System.EventHandler(this.button6_Click);
-            // 
-            // button7
-            // 
-            this.button7.Image = ((System.Drawing.Image)(resources.GetObject("button7.Image")));
-            this.button7.Location = new System.Drawing.Point(111, 48);
-            this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(23, 23);
-            this.button7.TabIndex = 9;
-            this.button7.UseVisualStyleBackColor = true;
-            this.button7.Click += new System.EventHandler(this.button7_Click);
-            // 
-            // button8
-            // 
-            this.button8.Image = ((System.Drawing.Image)(resources.GetObject("button8.Image")));
-            this.button8.Location = new System.Drawing.Point(111, 19);
-            this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(23, 23);
-            this.button8.TabIndex = 10;
-            this.button8.UseVisualStyleBackColor = true;
-            this.button8.Click += new System.EventHandler(this.button8_Click);
             // 
             // check_rot
             // 
@@ -805,15 +792,15 @@
             this.check_rot.Text = "Rotacionar em  90°";
             this.check_rot.UseVisualStyleBackColor = true;
             // 
-            // button9
+            // button5
             // 
-            this.button9.Location = new System.Drawing.Point(13, 43);
-            this.button9.Name = "button9";
-            this.button9.Size = new System.Drawing.Size(87, 22);
-            this.button9.TabIndex = 11;
-            this.button9.Text = "&Apagar item";
-            this.button9.UseVisualStyleBackColor = true;
-            this.button9.Click += new System.EventHandler(this.button9_Click);
+            this.button5.Location = new System.Drawing.Point(6, 17);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(64, 25);
+            this.button5.TabIndex = 20;
+            this.button5.Text = "&Adicionar";
+            this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
             // Form1
             // 
@@ -878,7 +865,6 @@
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.TextBox text_comando;
         private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.TextBox text_retracao;
@@ -911,9 +897,9 @@
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.TextBox text_inter_x;
         private System.Windows.Forms.Label label15;
-        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.TextBox text_quant;
         private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.TextBox textBox4;
+        private System.Windows.Forms.TextBox text_raio;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.TextBox text_q_y;
         private System.Windows.Forms.Label label3;
