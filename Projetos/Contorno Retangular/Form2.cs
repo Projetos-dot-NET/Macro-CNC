@@ -1,21 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
-
-using System.IO;
-using System.Diagnostics;
+﻿
+using static System.Math;
+using static System.Convert;
+using static ContornoRetangular.Classes.Comandos;
 using ContornoRetangular.Classes;
 
 namespace ContornoRetangular
 {
-
+    
 
     public partial class Form2 : Form
     {
@@ -43,7 +34,7 @@ namespace ContornoRetangular
         {
             InitializeComponent();
         }
-        public void criarArquivo() //Rotina para salvar o arquivo para o CNC
+        private void criarArquivo() //Rotina para salvar o arquivo para o CNC
         {
             try
             {
@@ -122,7 +113,7 @@ namespace ContornoRetangular
             }
         }
 
-        public void interfaceUsuario(Boolean st) //Rotina para preparar a interface para selecionar a pasta a ser gravada
+        private void interfaceUsuario(Boolean st) //Rotina para preparar a interface para selecionar a pasta a ser gravada
         {
 
             // titulo a caixa de diágolo do browser que será aberta
@@ -152,7 +143,7 @@ namespace ContornoRetangular
         
         private void btn_escreve_Click(object sender, EventArgs e) //Rotina para escrever o codigo CNC de usinagem
         {
-
+            
             text_dist_x.Text = text_dist_x.Text.Replace(".",",");
             text_dist_y.Text = text_dist_y.Text.Replace(".",",");
             text_dia_fresa.Text = text_dia_fresa.Text.Replace(".",",");
@@ -170,101 +161,101 @@ namespace ContornoRetangular
             if (opc_mais.Checked == true && opc_externo.Checked == true)
             {
                 
-                ajuste_x = Convert.ToDecimal(text_dist_x.Text) - (Convert.ToDecimal(text_dia_fresa.Text) / 2 + Convert.ToDecimal(text_ajuste.Text)/2);
-                ajuste_y = Convert.ToDecimal(text_dist_y.Text) - (Convert.ToDecimal(text_dia_fresa.Text) / 2 + Convert.ToDecimal(text_ajuste.Text)/2);
+                ajuste_x = ToDecimal(text_dist_x.Text) - (ToDecimal(text_dia_fresa.Text) / 2 + ToDecimal(text_ajuste.Text)/2);
+                ajuste_y = ToDecimal(text_dist_y.Text) - (ToDecimal(text_dia_fresa.Text) / 2 + ToDecimal(text_ajuste.Text)/2);
             }
 
             if (opc_menos.Checked == true && opc_externo.Checked == true)
             {
-                ajuste_x = Convert.ToDecimal(text_dist_x.Text) - (Convert.ToDecimal(text_dia_fresa.Text) / 2 - Convert.ToDecimal(text_ajuste.Text)/2);
-                ajuste_y = Convert.ToDecimal(text_dist_y.Text) - (Convert.ToDecimal(text_dia_fresa.Text) / 2 - Convert.ToDecimal(text_ajuste.Text)/2);
+                ajuste_x = ToDecimal(text_dist_x.Text) - (ToDecimal(text_dia_fresa.Text) / 2 - ToDecimal(text_ajuste.Text)/2);
+                ajuste_y = ToDecimal(text_dist_y.Text) - (ToDecimal(text_dia_fresa.Text) / 2 - ToDecimal(text_ajuste.Text)/2);
             }
             if (opc_mais.Checked == true && opc_interno.Checked == true)
             {
-                ajuste_x = Convert.ToDecimal(text_dist_x.Text) + (Convert.ToDecimal(text_dia_fresa.Text) / 2 + Convert.ToDecimal(text_ajuste.Text)/2);
-                ajuste_y = Convert.ToDecimal(text_dist_y.Text) + (Convert.ToDecimal(text_dia_fresa.Text) / 2 + Convert.ToDecimal(text_ajuste.Text)/2);
+                ajuste_x = ToDecimal(text_dist_x.Text) + (ToDecimal(text_dia_fresa.Text) / 2 + ToDecimal(text_ajuste.Text)/2);
+                ajuste_y = ToDecimal(text_dist_y.Text) + (ToDecimal(text_dia_fresa.Text) / 2 + ToDecimal(text_ajuste.Text)/2);
             }
 
             if (opc_menos.Checked == true && opc_interno.Checked == true)
             {
-                ajuste_x = Convert.ToDecimal(text_dist_x.Text) + (Convert.ToDecimal(text_dia_fresa.Text) / 2 - Convert.ToDecimal(text_ajuste.Text)/2);
-                ajuste_y = Convert.ToDecimal(text_dist_y.Text) + (Convert.ToDecimal(text_dia_fresa.Text) / 2 - Convert.ToDecimal(text_ajuste.Text)/2);
+                ajuste_x = ToDecimal(text_dist_x.Text) + (ToDecimal(text_dia_fresa.Text) / 2 - ToDecimal(text_ajuste.Text)/2);
+                ajuste_y = ToDecimal(text_dist_y.Text) + (ToDecimal(text_dia_fresa.Text) / 2 - ToDecimal(text_ajuste.Text)/2);
             }
 
             x = ajuste_x;
             y = ajuste_y;
-            text_codigo.Text = text_codigo.Text + "G0 X " + Math.Round(ajuste_x,4) + " Y " + Math.Round(ajuste_y,4) + Environment.NewLine ;
-            npasso = Convert.ToDecimal(text_final_z.Text) / Convert.ToDecimal(text_av_vertical.Text);
-            npasso = Math.Ceiling(npasso);
-            passo = Convert.ToDecimal(text_final_z.Text) / Convert.ToDecimal(npasso); 
+            text_codigo.Text = text_codigo.Text + "G0 X " + Round(ajuste_x,4) + " Y " + Round(ajuste_y,4) + Environment.NewLine ;
+            npasso = ToDecimal(text_final_z.Text) / ToDecimal(text_av_vertical.Text);
+            npasso = Ceiling(npasso);
+            passo = ToDecimal(text_final_z.Text) / ToDecimal(npasso); 
 
-            z = Convert.ToDecimal(text_aprox_z.Text);
+            z = ToDecimal(text_aprox_z.Text);
             
-            text_codigo.Text = text_codigo.Text + "G0 Z " + Math.Round(z, 4) + Environment.NewLine;
+            text_codigo.Text = text_codigo.Text + "G0 Z " + Round(z, 4) + Environment.NewLine;
             
             z = passo;
 
             for (int f = 0; f < npasso; f++)
             {
-                text_codigo.Text = text_codigo.Text + "G1 Z-" + Math.Round(z, 4) + " F " + Convert.ToDecimal(text_mergulho.Text) + Environment.NewLine;
+                text_codigo.Text = text_codigo.Text + "G1 Z-" + Round(z, 4) + " F " + ToDecimal(text_mergulho.Text) + Environment.NewLine;
                 z = z + passo;
                 //Usinar no sentido concordante interno ou interno mais ajuste
                 if (opc_interno.Checked == true && opc_concordante.Checked == true && opc_mais.Checked == true)
                 {
-                    y = y + Convert.ToDecimal(text_y.Text) - Convert.ToDecimal(text_dia_fresa.Text) - Convert.ToDecimal(text_ajuste.Text);
-                    text_codigo.Text = text_codigo.Text + "G1 X " + Math.Round(x, 4) + " Y " + Math.Round(y, 4) + " F " + Convert.ToDecimal(text_avanco.Text) + Environment.NewLine;
+                    y = y + ToDecimal(text_y.Text) - ToDecimal(text_dia_fresa.Text) - ToDecimal(text_ajuste.Text);
+                    text_codigo.Text = text_codigo.Text + "G1 X " + Round(x, 4) + " Y " + Round(y, 4) + " F " + ToDecimal(text_avanco.Text) + Environment.NewLine;
 
-                    x = x + Convert.ToDecimal(text_x.Text) - Convert.ToDecimal(text_dia_fresa.Text) - Convert.ToDecimal(text_ajuste.Text);
-                    text_codigo.Text = text_codigo.Text + "G1 X " + Math.Round(x, 4) + " Y " + Math.Round(y, 4) + Environment.NewLine;
+                    x = x + ToDecimal(text_x.Text) - ToDecimal(text_dia_fresa.Text) - ToDecimal(text_ajuste.Text);
+                    text_codigo.Text = text_codigo.Text + "G1 X " + Round(x, 4) + " Y " + Round(y, 4) + Environment.NewLine;
 
-                    y = y - Convert.ToDecimal(text_y.Text) + Convert.ToDecimal(text_dia_fresa.Text) + Convert.ToDecimal(text_ajuste.Text);
-                    text_codigo.Text = text_codigo.Text + "G1 X " + Math.Round(x, 4) + " Y " + Math.Round(y, 4) + Environment.NewLine;
+                    y = y - ToDecimal(text_y.Text) + ToDecimal(text_dia_fresa.Text) + ToDecimal(text_ajuste.Text);
+                    text_codigo.Text = text_codigo.Text + "G1 X " + Round(x, 4) + " Y " + Round(y, 4) + Environment.NewLine;
 
-                    x = x - Convert.ToDecimal(text_x.Text) + Convert.ToDecimal(text_dia_fresa.Text) + Convert.ToDecimal(text_ajuste.Text);
-                    text_codigo.Text = text_codigo.Text + "G1 X " + Math.Round(x, 4) + " Y " + Math.Round(y, 4) + Environment.NewLine;
+                    x = x - ToDecimal(text_x.Text) + ToDecimal(text_dia_fresa.Text) + ToDecimal(text_ajuste.Text);
+                    text_codigo.Text = text_codigo.Text + "G1 X " + Round(x, 4) + " Y " + Round(y, 4) + Environment.NewLine;
                  }
                 if (opc_externo.Checked == true && opc_concordante.Checked == true && opc_mais.Checked == true)
                 {
-                    y = y + Convert.ToDecimal(text_y.Text) + Convert.ToDecimal(text_dia_fresa.Text) + Convert.ToDecimal(text_ajuste.Text);
-                    text_codigo.Text = text_codigo.Text + "G1 X " + Math.Round(x, 4) + " Y " + Math.Round(y, 4) + " F " + Convert.ToDecimal(text_avanco.Text) + Environment.NewLine;
+                    y = y + ToDecimal(text_y.Text) + ToDecimal(text_dia_fresa.Text) + ToDecimal(text_ajuste.Text);
+                    text_codigo.Text = text_codigo.Text + "G1 X " + Round(x, 4) + " Y " + Round(y, 4) + " F " + ToDecimal(text_avanco.Text) + Environment.NewLine;
 
-                    x = x + Convert.ToDecimal(text_x.Text) + Convert.ToDecimal(text_dia_fresa.Text) + Convert.ToDecimal(text_ajuste.Text);
-                    text_codigo.Text = text_codigo.Text + "G1 X " + Math.Round(x, 4) + " Y " + Math.Round(y, 4) + Environment.NewLine;
+                    x = x + ToDecimal(text_x.Text) + ToDecimal(text_dia_fresa.Text) + ToDecimal(text_ajuste.Text);
+                    text_codigo.Text = text_codigo.Text + "G1 X " + Round(x, 4) + " Y " + Round(y, 4) + Environment.NewLine;
 
-                    y = y - Convert.ToDecimal(text_y.Text) - Convert.ToDecimal(text_dia_fresa.Text) - Convert.ToDecimal(text_ajuste.Text);
-                    text_codigo.Text = text_codigo.Text + "G1 X " + Math.Round(x, 4) + " Y " + Math.Round(y, 4) + Environment.NewLine;
+                    y = y - ToDecimal(text_y.Text) - ToDecimal(text_dia_fresa.Text) - ToDecimal(text_ajuste.Text);
+                    text_codigo.Text = text_codigo.Text + "G1 X " + Round(x, 4) + " Y " + Round(y, 4) + Environment.NewLine;
 
-                    x = x - Convert.ToDecimal(text_x.Text) - Convert.ToDecimal(text_dia_fresa.Text) - Convert.ToDecimal(text_ajuste.Text);
-                    text_codigo.Text = text_codigo.Text + "G1 X " + Math.Round(x, 4) + " Y " + Math.Round(y, 4) + Environment.NewLine;
+                    x = x - ToDecimal(text_x.Text) - ToDecimal(text_dia_fresa.Text) - ToDecimal(text_ajuste.Text);
+                    text_codigo.Text = text_codigo.Text + "G1 X " + Round(x, 4) + " Y " + Round(y, 4) + Environment.NewLine;
                 }
                 //Usinar no sentido concordante interno ou interno menos ajuste
                 if (opc_interno.Checked == true && opc_concordante.Checked == true && opc_menos.Checked == true)
                 {
-                    y = y + Convert.ToDecimal(text_y.Text) - Convert.ToDecimal(text_dia_fresa.Text) + Convert.ToDecimal(text_ajuste.Text);
-                    text_codigo.Text = text_codigo.Text + "G1 X " + Math.Round(x, 4) + " Y " + Math.Round(y, 4) + " F " + Convert.ToDecimal(text_avanco.Text) + Environment.NewLine;
+                    y = y + ToDecimal(text_y.Text) - ToDecimal(text_dia_fresa.Text) + ToDecimal(text_ajuste.Text);
+                    text_codigo.Text = text_codigo.Text + "G1 X " + Round(x, 4) + " Y " + Round(y, 4) + " F " + ToDecimal(text_avanco.Text) + Environment.NewLine;
 
-                    x = x + Convert.ToDecimal(text_x.Text) - Convert.ToDecimal(text_dia_fresa.Text) + Convert.ToDecimal(text_ajuste.Text);
-                    text_codigo.Text = text_codigo.Text + "G1 X " + Math.Round(x, 4) + " Y " + Math.Round(y, 4) + Environment.NewLine;
+                    x = x + ToDecimal(text_x.Text) - ToDecimal(text_dia_fresa.Text) + ToDecimal(text_ajuste.Text);
+                    text_codigo.Text = text_codigo.Text + "G1 X " + Round(x, 4) + " Y " + Round(y, 4) + Environment.NewLine;
 
-                    y = y - Convert.ToDecimal(text_y.Text) + Convert.ToDecimal(text_dia_fresa.Text) - Convert.ToDecimal(text_ajuste.Text);
-                    text_codigo.Text = text_codigo.Text + "G1 X " + Math.Round(x, 4) + " Y " + Math.Round(y, 4) + Environment.NewLine;
+                    y = y - ToDecimal(text_y.Text) + ToDecimal(text_dia_fresa.Text) - ToDecimal(text_ajuste.Text);
+                    text_codigo.Text = text_codigo.Text + "G1 X " + Round(x, 4) + " Y " + Round(y, 4) + Environment.NewLine;
 
-                    x = x - Convert.ToDecimal(text_x.Text) + Convert.ToDecimal(text_dia_fresa.Text) - Convert.ToDecimal(text_ajuste.Text);
-                    text_codigo.Text = text_codigo.Text + "G1 X " + Math.Round(x, 4) + " Y " + Math.Round(y, 4) + Environment.NewLine;
+                    x = x - ToDecimal(text_x.Text) + ToDecimal(text_dia_fresa.Text) - ToDecimal(text_ajuste.Text);
+                    text_codigo.Text = text_codigo.Text + "G1 X " + Round(x, 4) + " Y " + Round(y, 4) + Environment.NewLine;
                 }
                 if (opc_externo.Checked == true && opc_concordante.Checked == true && opc_menos.Checked == true)
                 {
-                    y = y + Convert.ToDecimal(text_y.Text) + Convert.ToDecimal(text_dia_fresa.Text) - Convert.ToDecimal(text_ajuste.Text);
-                    text_codigo.Text = text_codigo.Text + "G1 X " + Math.Round(x, 4) + " Y " + Math.Round(y, 4) + " F " + Convert.ToDecimal(text_avanco.Text) + Environment.NewLine;
+                    y = y + ToDecimal(text_y.Text) + ToDecimal(text_dia_fresa.Text) - ToDecimal(text_ajuste.Text);
+                    text_codigo.Text = text_codigo.Text + "G1 X " + Round(x, 4) + " Y " + Round(y, 4) + " F " + ToDecimal(text_avanco.Text) + Environment.NewLine;
 
-                    x = x + Convert.ToDecimal(text_x.Text) + Convert.ToDecimal(text_dia_fresa.Text) - Convert.ToDecimal(text_ajuste.Text);
-                    text_codigo.Text = text_codigo.Text + "G1 X " + Math.Round(x, 4) + " Y " + Math.Round(y, 4) + Environment.NewLine;
+                    x = x + ToDecimal(text_x.Text) + ToDecimal(text_dia_fresa.Text) - ToDecimal(text_ajuste.Text);
+                    text_codigo.Text = text_codigo.Text + "G1 X " + Round(x, 4) + " Y " + Round(y, 4) + Environment.NewLine;
 
-                    y = y - Convert.ToDecimal(text_y.Text) - Convert.ToDecimal(text_dia_fresa.Text) + Convert.ToDecimal(text_ajuste.Text);
-                    text_codigo.Text = text_codigo.Text + "G1 X " + Math.Round(x, 4) + " Y " + Math.Round(y, 4) + Environment.NewLine;
+                    y = y - ToDecimal(text_y.Text) - ToDecimal(text_dia_fresa.Text) + ToDecimal(text_ajuste.Text);
+                    text_codigo.Text = text_codigo.Text + "G1 X " + Round(x, 4) + " Y " + Round(y, 4) + Environment.NewLine;
 
-                    x = x - Convert.ToDecimal(text_x.Text) - Convert.ToDecimal(text_dia_fresa.Text) + Convert.ToDecimal(text_ajuste.Text);
-                    text_codigo.Text = text_codigo.Text + "G1 X " + Math.Round(x, 4) + " Y " + Math.Round(y, 4) + Environment.NewLine;
+                    x = x - ToDecimal(text_x.Text) - ToDecimal(text_dia_fresa.Text) + ToDecimal(text_ajuste.Text);
+                    text_codigo.Text = text_codigo.Text + "G1 X " + Round(x, 4) + " Y " + Round(y, 4) + Environment.NewLine;
                 }
 
 
@@ -272,62 +263,62 @@ namespace ContornoRetangular
                 //Usinar no sentido discordante interno ou externo mais ajuste
                 if (opc_interno.Checked == true && opc_discordante.Checked == true && opc_mais.Checked == true)
                 {
-                    x = x + Convert.ToDecimal(text_x.Text) - Convert.ToDecimal(text_dia_fresa.Text) + Convert.ToDecimal(text_ajuste.Text);
-                    text_codigo.Text = text_codigo.Text + "G1 X " + Math.Round(x, 4) + " Y " + Math.Round(y, 4) + " F " + Convert.ToDecimal(text_avanco.Text) + Environment.NewLine;
+                    x = x + ToDecimal(text_x.Text) - ToDecimal(text_dia_fresa.Text) + ToDecimal(text_ajuste.Text);
+                    text_codigo.Text = text_codigo.Text + "G1 X " + Round(x, 4) + " Y " + Round(y, 4) + " F " + ToDecimal(text_avanco.Text) + Environment.NewLine;
 
-                    y = y + Convert.ToDecimal(text_y.Text) - Convert.ToDecimal(text_dia_fresa.Text) + Convert.ToDecimal(text_ajuste.Text);
-                    text_codigo.Text = text_codigo.Text + "G1 X " + Math.Round(x, 4) + " Y " + Math.Round(y, 4) + Environment.NewLine;
+                    y = y + ToDecimal(text_y.Text) - ToDecimal(text_dia_fresa.Text) + ToDecimal(text_ajuste.Text);
+                    text_codigo.Text = text_codigo.Text + "G1 X " + Round(x, 4) + " Y " + Round(y, 4) + Environment.NewLine;
 
-                    x = x - Convert.ToDecimal(text_x.Text) + Convert.ToDecimal(text_dia_fresa.Text) - Convert.ToDecimal(text_ajuste.Text);
-                    text_codigo.Text = text_codigo.Text + "G1 X " + Math.Round(x, 4) + " Y " + Math.Round(y, 4) + Environment.NewLine;
+                    x = x - ToDecimal(text_x.Text) + ToDecimal(text_dia_fresa.Text) - ToDecimal(text_ajuste.Text);
+                    text_codigo.Text = text_codigo.Text + "G1 X " + Round(x, 4) + " Y " + Round(y, 4) + Environment.NewLine;
 
-                    y = y - Convert.ToDecimal(text_y.Text) + Convert.ToDecimal(text_dia_fresa.Text) - Convert.ToDecimal(text_ajuste.Text);
-                    text_codigo.Text = text_codigo.Text + "G1 X " + Math.Round(x, 4) + " Y " + Math.Round(y, 4) + Environment.NewLine;
+                    y = y - ToDecimal(text_y.Text) + ToDecimal(text_dia_fresa.Text) - ToDecimal(text_ajuste.Text);
+                    text_codigo.Text = text_codigo.Text + "G1 X " + Round(x, 4) + " Y " + Round(y, 4) + Environment.NewLine;
 
                 }
                 if (opc_externo.Checked == true && opc_discordante.Checked == true && opc_mais.Checked == true)
                 {
-                    x = x + Convert.ToDecimal(text_x.Text) + Convert.ToDecimal(text_dia_fresa.Text) - Convert.ToDecimal(text_ajuste.Text);
-                    text_codigo.Text = text_codigo.Text + "G1 X " + Math.Round(x, 4) + " Y " + Math.Round(y, 4) + " F " + Convert.ToDecimal(text_avanco.Text) + Environment.NewLine;
+                    x = x + ToDecimal(text_x.Text) + ToDecimal(text_dia_fresa.Text) - ToDecimal(text_ajuste.Text);
+                    text_codigo.Text = text_codigo.Text + "G1 X " + Round(x, 4) + " Y " + Round(y, 4) + " F " + ToDecimal(text_avanco.Text) + Environment.NewLine;
 
-                    y = y + Convert.ToDecimal(text_y.Text) + Convert.ToDecimal(text_dia_fresa.Text) - Convert.ToDecimal(text_ajuste.Text);
-                    text_codigo.Text = text_codigo.Text + "G1 X " + Math.Round(x, 4) + " Y " + Math.Round(y, 4) + Environment.NewLine;
+                    y = y + ToDecimal(text_y.Text) + ToDecimal(text_dia_fresa.Text) - ToDecimal(text_ajuste.Text);
+                    text_codigo.Text = text_codigo.Text + "G1 X " + Round(x, 4) + " Y " + Round(y, 4) + Environment.NewLine;
 
-                    x = x - Convert.ToDecimal(text_x.Text) - Convert.ToDecimal(text_dia_fresa.Text) + Convert.ToDecimal(text_ajuste.Text);
-                    text_codigo.Text = text_codigo.Text + "G1 X " + Math.Round(x, 4) + " Y " + Math.Round(y, 4) + Environment.NewLine;
+                    x = x - ToDecimal(text_x.Text) - ToDecimal(text_dia_fresa.Text) + ToDecimal(text_ajuste.Text);
+                    text_codigo.Text = text_codigo.Text + "G1 X " + Round(x, 4) + " Y " + Round(y, 4) + Environment.NewLine;
 
-                    y = y - Convert.ToDecimal(text_y.Text) - Convert.ToDecimal(text_dia_fresa.Text) + Convert.ToDecimal(text_ajuste.Text);
-                    text_codigo.Text = text_codigo.Text + "G1 X " + Math.Round(x, 4) + " Y " + Math.Round(y, 4) + Environment.NewLine;
+                    y = y - ToDecimal(text_y.Text) - ToDecimal(text_dia_fresa.Text) + ToDecimal(text_ajuste.Text);
+                    text_codigo.Text = text_codigo.Text + "G1 X " + Round(x, 4) + " Y " + Round(y, 4) + Environment.NewLine;
                 }
                 //Usinar no sentido discordante interno ou externo menos ajuste
                 if (opc_interno.Checked == true && opc_discordante.Checked == true && opc_menos.Checked == true)
                 {
-                    x = x + Convert.ToDecimal(text_x.Text) - Convert.ToDecimal(text_dia_fresa.Text) - Convert.ToDecimal(text_ajuste.Text);
-                    text_codigo.Text = text_codigo.Text + "G1 X " + Math.Round(x, 4) + " Y " + Math.Round(y, 4) + " F " + Convert.ToDecimal(text_avanco.Text) + Environment.NewLine;
+                    x = x + ToDecimal(text_x.Text) - ToDecimal(text_dia_fresa.Text) - ToDecimal(text_ajuste.Text);
+                    text_codigo.Text = text_codigo.Text + "G1 X " + Round(x, 4) + " Y " + Round(y, 4) + " F " + ToDecimal(text_avanco.Text) + Environment.NewLine;
 
-                    y = y + Convert.ToDecimal(text_y.Text) - Convert.ToDecimal(text_dia_fresa.Text) - Convert.ToDecimal(text_ajuste.Text);
-                    text_codigo.Text = text_codigo.Text + "G1 X " + Math.Round(x, 4) + " Y " + Math.Round(y, 4) + Environment.NewLine;
+                    y = y + ToDecimal(text_y.Text) - ToDecimal(text_dia_fresa.Text) - ToDecimal(text_ajuste.Text);
+                    text_codigo.Text = text_codigo.Text + "G1 X " + Round(x, 4) + " Y " + Round(y, 4) + Environment.NewLine;
 
-                    x = x - Convert.ToDecimal(text_x.Text) + Convert.ToDecimal(text_dia_fresa.Text) + Convert.ToDecimal(text_ajuste.Text);
-                    text_codigo.Text = text_codigo.Text + "G1 X " + Math.Round(x, 4) + " Y " + Math.Round(y, 4) + Environment.NewLine;
+                    x = x - ToDecimal(text_x.Text) + ToDecimal(text_dia_fresa.Text) + ToDecimal(text_ajuste.Text);
+                    text_codigo.Text = text_codigo.Text + "G1 X " + Round(x, 4) + " Y " + Round(y, 4) + Environment.NewLine;
 
-                    y = y - Convert.ToDecimal(text_y.Text) + Convert.ToDecimal(text_dia_fresa.Text) + Convert.ToDecimal(text_ajuste.Text);
-                    text_codigo.Text = text_codigo.Text + "G1 X " + Math.Round(x, 4) + " Y " + Math.Round(y, 4) + Environment.NewLine;
+                    y = y - ToDecimal(text_y.Text) + ToDecimal(text_dia_fresa.Text) + ToDecimal(text_ajuste.Text);
+                    text_codigo.Text = text_codigo.Text + "G1 X " + Round(x, 4) + " Y " + Round(y, 4) + Environment.NewLine;
 
                 }
                 if (opc_externo.Checked == true && opc_discordante.Checked == true && opc_menos.Checked == true)
                 {
-                    x = x + Convert.ToDecimal(text_x.Text) + Convert.ToDecimal(text_dia_fresa.Text) + Convert.ToDecimal(text_ajuste.Text);
-                    text_codigo.Text = text_codigo.Text + "G1 X " + Math.Round(x, 4) + " Y " + Math.Round(y, 4) + " F " + Convert.ToDecimal(text_avanco.Text) + Environment.NewLine;
+                    x = x + ToDecimal(text_x.Text) + ToDecimal(text_dia_fresa.Text) + ToDecimal(text_ajuste.Text);
+                    text_codigo.Text = text_codigo.Text + "G1 X " + Round(x, 4) + " Y " + Round(y, 4) + " F " + ToDecimal(text_avanco.Text) + Environment.NewLine;
 
-                    y = y + Convert.ToDecimal(text_y.Text) + Convert.ToDecimal(text_dia_fresa.Text) + Convert.ToDecimal(text_ajuste.Text);
-                    text_codigo.Text = text_codigo.Text + "G1 X " + Math.Round(x, 4) + " Y " + Math.Round(y, 4) + Environment.NewLine;
+                    y = y + ToDecimal(text_y.Text) + ToDecimal(text_dia_fresa.Text) + ToDecimal(text_ajuste.Text);
+                    text_codigo.Text = text_codigo.Text + "G1 X " + Round(x, 4) + " Y " + Round(y, 4) + Environment.NewLine;
 
-                    x = x - Convert.ToDecimal(text_x.Text) - Convert.ToDecimal(text_dia_fresa.Text) - Convert.ToDecimal(text_ajuste.Text);
-                    text_codigo.Text = text_codigo.Text + "G1 X " + Math.Round(x, 4) + " Y " + Math.Round(y, 4) + Environment.NewLine;
+                    x = x - ToDecimal(text_x.Text) - ToDecimal(text_dia_fresa.Text) - ToDecimal(text_ajuste.Text);
+                    text_codigo.Text = text_codigo.Text + "G1 X " + Round(x, 4) + " Y " + Round(y, 4) + Environment.NewLine;
 
-                    y = y - Convert.ToDecimal(text_y.Text) - Convert.ToDecimal(text_dia_fresa.Text) - Convert.ToDecimal(text_ajuste.Text);
-                    text_codigo.Text = text_codigo.Text + "G1 X " + Math.Round(x, 4) + " Y " + Math.Round(y, 4) + Environment.NewLine;
+                    y = y - ToDecimal(text_y.Text) - ToDecimal(text_dia_fresa.Text) - ToDecimal(text_ajuste.Text);
+                    text_codigo.Text = text_codigo.Text + "G1 X " + Round(x, 4) + " Y " + Round(y, 4) + Environment.NewLine;
                 }
             }
             text_codigo.Text = text_codigo.Text.Replace(",", ".");
@@ -340,12 +331,12 @@ namespace ContornoRetangular
 
         private void btn_Cab_Click(object sender, EventArgs e) //Rotina para escrever o Cabeçalho para Mach3
         {
-            text_codigo.Text = Comandos.InserirCabecalho();
+            text_codigo.Text = InserirCabecalho();
         }
 
         private void btn_Rod_Click(object sender, EventArgs e) //Rotina para escrever o Rodapé para Mach3
         {
-            text_codigo.Text += Comandos.InserirRodape();
+            text_codigo.Text += InserirRodape();
         }
 
         private void btn_ok_Click(object sender, EventArgs e) //Chamada da interface pelo botão de salvar
