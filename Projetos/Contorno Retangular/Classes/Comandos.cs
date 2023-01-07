@@ -5,9 +5,7 @@ namespace ContornoRetangular.Classes
     {
         public static string InserirCabecalho()
         {
-            var cabecalho = "G17 G21 G90 (Plano XY - metrico - absoluto)" + Environment.NewLine +
-                            "G0 Z25.000 (25mm de seguranca)" + Environment.NewLine +
-                            "G0 X0.000 Y0.000 (zero peca)" + Environment.NewLine +
+            var cabecalho = "G0 X0.000 Y0.000 (zero peca)" + Environment.NewLine +
                             "S12000 (velocidade spidle)" + Environment.NewLine +
                             "M0 (troca manual de ferramenta)" + Environment.NewLine +
                             "M3 (liga spindle)" + Environment.NewLine +
@@ -19,8 +17,7 @@ namespace ContornoRetangular.Classes
 
         public static string InserirRodape()
         {
-            var rodape = "G0 Z25.000" + Environment.NewLine +
-                         "M5" + Environment.NewLine +
+            var rodape = "M5" + Environment.NewLine +
                          "G0 X0.000 Y0.000" + Environment.NewLine +
                          "M30" + Environment.NewLine;
 

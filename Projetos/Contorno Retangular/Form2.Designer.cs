@@ -90,6 +90,9 @@
             this.label14 = new System.Windows.Forms.Label();
             this.text_pasta = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
+            this.pictureBox16 = new System.Windows.Forms.PictureBox();
+            this.label15 = new System.Windows.Forms.Label();
+            this.text_Z_troca = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -110,6 +113,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox10)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox9)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox16)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -168,7 +172,7 @@
             // 
             // btn_cancela
             // 
-            this.btn_cancela.Location = new System.Drawing.Point(195, 688);
+            this.btn_cancela.Location = new System.Drawing.Point(195, 718);
             this.btn_cancela.Name = "btn_cancela";
             this.btn_cancela.Size = new System.Drawing.Size(75, 24);
             this.btn_cancela.TabIndex = 10;
@@ -178,7 +182,7 @@
             // 
             // btn_ok
             // 
-            this.btn_ok.Location = new System.Drawing.Point(8, 688);
+            this.btn_ok.Location = new System.Drawing.Point(8, 718);
             this.btn_ok.Name = "btn_ok";
             this.btn_ok.Size = new System.Drawing.Size(75, 24);
             this.btn_ok.TabIndex = 11;
@@ -192,7 +196,7 @@
             this.text_codigo.Multiline = true;
             this.text_codigo.Name = "text_codigo";
             this.text_codigo.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.text_codigo.Size = new System.Drawing.Size(338, 600);
+            this.text_codigo.Size = new System.Drawing.Size(338, 629);
             this.text_codigo.TabIndex = 12;
             // 
             // btn_escreve
@@ -592,6 +596,9 @@
             // 
             // groupBox4
             // 
+            this.groupBox4.Controls.Add(this.pictureBox16);
+            this.groupBox4.Controls.Add(this.label15);
+            this.groupBox4.Controls.Add(this.text_Z_troca);
             this.groupBox4.Controls.Add(this.pictureBox11);
             this.groupBox4.Controls.Add(this.pictureBox10);
             this.groupBox4.Controls.Add(this.pictureBox9);
@@ -606,7 +613,7 @@
             this.groupBox4.Controls.Add(this.text_final_z);
             this.groupBox4.Location = new System.Drawing.Point(6, 506);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(264, 167);
+            this.groupBox4.Size = new System.Drawing.Size(264, 206);
             this.groupBox4.TabIndex = 32;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Movimentos";
@@ -743,11 +750,39 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // pictureBox16
+            // 
+            this.pictureBox16.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox16.Image")));
+            this.pictureBox16.Location = new System.Drawing.Point(223, 162);
+            this.pictureBox16.Name = "pictureBox16";
+            this.pictureBox16.Size = new System.Drawing.Size(32, 33);
+            this.pictureBox16.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.pictureBox16.TabIndex = 54;
+            this.pictureBox16.TabStop = false;
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(26, 168);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(115, 15);
+            this.label15.TabIndex = 52;
+            this.label15.Text = "Troca Ferramenta Z):";
+            // 
+            // text_Z_troca
+            // 
+            this.text_Z_troca.Location = new System.Drawing.Point(148, 165);
+            this.text_Z_troca.Name = "text_Z_troca";
+            this.text_Z_troca.Size = new System.Drawing.Size(52, 23);
+            this.text_Z_troca.TabIndex = 53;
+            this.text_Z_troca.Text = "25";
+            this.text_Z_troca.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(635, 716);
+            this.ClientSize = new System.Drawing.Size(635, 749);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.label14);
             this.Controls.Add(this.text_pasta);
@@ -792,6 +827,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox10)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox9)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox16)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -861,5 +897,8 @@
         private Label label14;
         private TextBox text_pasta;
         private Button button1;
+        private PictureBox pictureBox16;
+        private Label label15;
+        private TextBox text_Z_troca;
     }
 }

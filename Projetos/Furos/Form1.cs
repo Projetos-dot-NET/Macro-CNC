@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Net.Mime.MediaTypeNames;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.TextBox;
 
@@ -20,7 +21,7 @@ namespace Furos
         //decimal passo = 0;
         //decimal npasso = 0;
         //decimal avanco = 0;
-        //decimal mergulho = 0;
+        decimal q = 0;
         decimal i = 0;
         decimal j = 0;
         decimal z_mergulho = 0;
@@ -30,6 +31,10 @@ namespace Furos
         int laco = 0;
         int c = 0;
         int l = 0;
+        //const decimal pi = 3.14159265358979;
+
+        Boolean s = false;
+
         public Form1()
         {
             InitializeComponent();
@@ -39,13 +44,15 @@ namespace Furos
         {
             //Cabeçalho
             text_comando.Text = "G17 G21 G90 (Plano XY - metrico - absoluto)" + Environment.NewLine;
+            z = Convert.ToDecimal(text_Z_troca.Text);
+            text_comando.Text = text_comando.Text + "G0 Z" + Math.Round(z, 4) + " (Z para troca de ferramenta )" + Environment.NewLine;
             text_comando.Text = text_comando.Text + "G0 X0.000 Y0.000 (zero peca)" + Environment.NewLine;
             text_comando.Text = text_comando.Text + "S12000 (velocidade spidle)" + Environment.NewLine;
             text_comando.Text = text_comando.Text + "M0 (troca manual de ferramenta)" + Environment.NewLine;
             text_comando.Text = text_comando.Text + "M3 (liga spindle)" + Environment.NewLine;
             text_comando.Text = text_comando.Text + "G4 P3.000 (pausa por 3 segundos)" + Environment.NewLine;
             z = Convert.ToDecimal(text_seg.Text);
-            text_comando.Text = text_comando.Text + "G0 Z" + z + " (Aproximacao de 5mm )" + Environment.NewLine;
+            text_comando.Text = text_comando.Text + "G0 Z" + Math.Round(z, 4) + " (Aproximacao)" + Environment.NewLine;
         }
 
         private void Escreve_rodape()
@@ -67,7 +74,37 @@ namespace Furos
 
         private void button3_Click(object sender, EventArgs e)
         {
-            list_brocas.Items.Remove(list_brocas.SelectedItem);
+            if (list_brocas.Items.Count > 0)
+            {
+                if (s == true)
+                {
+                    DialogResult Result = MessageBox.Show("Deseja apagar Item selecionado da lista", "Atenção",
+                    MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                    if (Result == DialogResult.Yes)
+                    {
+                        list_brocas.Items.Remove(list_brocas.SelectedItem);
+                    }
+
+                    for (int f = 0; f < list_brocas.Items.Count; f++)
+                    {
+                        if (list_brocas.GetSelected(f))
+                        {
+                            list_brocas.SetSelected(f, false);
+                            f = list_brocas.Items.Count;
+                        }
+                    }
+                    s = false;
+                }
+                else
+                {
+                    MessageBox.Show("Favor selecionar um item", "Atenção");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Não existe nenhum Item na lista", "Atenção");
+            }
+
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -90,8 +127,9 @@ namespace Furos
             else
             {
                 MessageBox.Show("Preencha a lista de furação por favor","Atenção");
+                return;
             }
-            //G82 X-7.9375 Y5.7150  Z-2.0000 F254   R3.0000  P1.000000
+            
             z = Convert.ToDecimal(text_final_z.Text);
             z_mergulho = Convert.ToDecimal(text_mergulho.Text);
             retracao = Convert.ToDecimal(text_retracao.Text);
@@ -103,6 +141,16 @@ namespace Furos
                 for (int f=1; f < list_brocas.Items.Count ; f++)
                 {
                     text_comando.Text = text_comando.Text + "G82 " + list_brocas.Items[f].ToString() + Environment.NewLine; 
+                }
+            }
+            else
+            {
+                q = Convert.ToDecimal(text_av_vertical.Text);
+                text_comando.Text = text_comando.Text + "G83 " + list_brocas.Items[0].ToString() + " Z-" + Math.Round(z, 4) +
+                        " F" + Math.Round(z_mergulho, 4) + " R" + Math.Round(retracao, 4) + " Q" + Math.Round(q, 4) + Environment.NewLine;
+                for (int f = 1; f < list_brocas.Items.Count; f++)
+                {
+                    text_comando.Text = text_comando.Text + "G83 " + list_brocas.Items[f].ToString() + Environment.NewLine;
                 }
             }
             Escreve_rodape();
@@ -140,9 +188,110 @@ namespace Furos
 
         }
 
+        private void list_brocas_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            s = true;
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            if (list_brocas.Items.Count > 0)
+            {
+                DialogResult Result = MessageBox.Show("Deseja apagar Todos os Item da lista", "Atenção",
+                    MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                if (Result == DialogResult.Yes)
+                {
+                    list_brocas.Items.Clear();
+                }
+            }
+            else
+            {
+                MessageBox.Show("Não existe nenhum Item na lista", "Atenção");
+            }
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            // para baixo da lista
+            ////////////////////////////
+
+            var index = list_brocas.SelectedIndex;
+            if (index + 1 > list_brocas.Items.Count - 1)
+                return; // não tem mais posição abaixo dele
+
+            if (index != -1)
+            {
+                // armazena o item
+                var item = list_brocas.Items[index];
+
+                // remove o item atual
+                list_brocas.Items.Remove(item);
+
+                // adiciona o item na posição atual + 1
+                list_brocas.Items.Insert(index + 1, item);
+
+                // deixa o item selecionado caso queira clicar no botão novamente
+                list_brocas.SelectedIndex = index + 1;
+            }
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            // para cima da lista
+            //////////////////////
+
+            var index = list_brocas.SelectedIndex;
+            if (index - 1 < 0)
+                return; // não tem mais posição acima dele
+
+            // armazena o item
+            var item = list_brocas.Items[index];
+
+            // remove o item atual
+            list_brocas.Items.Remove(item);
+
+            // adiciona o item na posição atual + 1
+            list_brocas.Items.Insert(index - 1, item);
+
+            // deixa o item selecionado caso queira clicar no botão novamente
+            list_brocas.SelectedIndex = index - 1;
+        }
+
         private void button5_Click(object sender, EventArgs e)
         {
-            
+            //Math.PI;
+            int AngIni=0;
+            int AngFim=360;
+            double X1 = 0;
+            double Y1 = 0;
+            int X = 0;
+            int Y = 0;
+            int f = 0;
+
+            if (check_rot.Checked == true)
+            {
+                AngIni = 90;
+                AngFim = 450;
+            }
+                for (f = AngIni; f < AngFim; f+=60) 
+            {
+                
+                {
+                    X1 = X + Math.Cos(f * Math.PI / 180) * 50;
+                    Y1 = Y + Math.Sin((180 - f) * Math.PI / 180) * 50;
+                    list_brocas.Items.Add(" X" + Math.Round(X1, 4) + " Y" + Math.Round(Y1, 4));
+                }
+
+            }
+
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+            for (int f = list_brocas.SelectedIndices.Count - 1; f>=0; f--)
+            {
+                list_brocas.Items.RemoveAt(list_brocas.SelectedIndices[f]);
+            }
         }
     }
 }
