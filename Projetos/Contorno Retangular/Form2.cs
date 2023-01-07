@@ -11,9 +11,9 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 using System.IO;
 using System.Diagnostics;
-using Macro_CNC.Classes;
+using ContornoRetangular.Classes;
 
-namespace Macro_CNC
+namespace ContornoRetangular
 {
 
 

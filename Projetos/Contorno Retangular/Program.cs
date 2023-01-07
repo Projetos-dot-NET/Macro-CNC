@@ -1,4 +1,4 @@
-namespace Macro_CNC
+namespace ContornoRetangular
 {
     internal static class Program
     {

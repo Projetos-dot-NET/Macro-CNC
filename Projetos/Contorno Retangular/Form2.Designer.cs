@@ -1,4 +1,4 @@
-﻿namespace Macro_CNC
+﻿namespace ContornoRetangular
 {
     partial class Form2
     {

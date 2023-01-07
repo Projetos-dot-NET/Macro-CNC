@@ -1,6 +1,6 @@
 {
   "profiles": {
-    "Macro CNC": {
+    "Contorno Retangular": {
       "commandName": "Project",
       "remoteDebugEnabled": false,
       "hotReloadEnabled": true

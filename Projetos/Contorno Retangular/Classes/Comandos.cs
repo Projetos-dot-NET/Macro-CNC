@@ -1,5 +1,5 @@
 ﻿
-namespace Macro_CNC.Classes
+namespace ContornoRetangular.Classes
 {
     public static class Comandos
     {
