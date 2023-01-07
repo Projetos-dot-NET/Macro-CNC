@@ -331,11 +331,17 @@ namespace ContornoRetangular
 
         private void btn_Cab_Click(object sender, EventArgs e) //Rotina para escrever o Cabeçalho para Mach3
         {
-            text_codigo.Text = InserirCabecalho();
+            text_codigo.Text = "G17 G21 G90 (Plano XY - metrico - absoluto)" + Environment.NewLine;
+            z = Convert.ToDecimal(text_Z_troca.Text);
+            text_codigo.Text = text_codigo.Text + "G0 Z" + Math.Round(z, 4) + " (Z para troca de ferramenta )" + Environment.NewLine;
+
+            text_codigo.Text += Comandos.InserirCabecalho();
         }
 
         private void btn_Rod_Click(object sender, EventArgs e) //Rotina para escrever o Rodapé para Mach3
         {
+            z = Convert.ToDecimal(text_Z_troca.Text);
+            text_codigo.Text = text_codigo.Text + "G0 Z" + Math.Round(z, 4) + " (Z para troca de ferramenta )" + Environment.NewLine;
             text_codigo.Text += InserirRodape();
         }
 
