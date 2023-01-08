@@ -225,8 +225,8 @@ namespace Furos
 
         private void button5_Click(object sender, EventArgs e)
         {
-            double AngIni = 0;
-            double AngFim = 360;
+            double AngIni;
+            double AngFim;
             decimal X1;
             decimal Y1;
             decimal X = Convert.ToDecimal(text_x.Text);
@@ -257,12 +257,10 @@ namespace Furos
             while (f < AngFim)
             {
                 {
-                    X1 = X + Convert.ToDecimal(Math.Cos(f * (Math.PI) / 180)) * raio;
-                    Y1 = Y + Convert.ToDecimal(Math.Sin((180 - f) * (Math.PI) / 180)) * raio;
+                    X1 = X + Convert.ToDecimal(Math.Cos(f * Math.PI / 180)) * raio;
+                    Y1 = Y + Convert.ToDecimal(Math.Sin((180 - f) * Math.PI / 180)) * raio;
                     list_brocas.Items.Add(" X" + Math.Round(X1, 4) + " Y" + Math.Round(Y1, 4));
 
-                    PointF pnt1 = new PointF(50, 50);
-                    PointF pnt2 = new PointF((float)X1,(float)Y1);
                     g.DrawEllipse(canela_Amarelo, (float)local_x + (float)X1 - (float)raio_furo, (float)local_y + (float)Y1 - (float)raio_furo, 2 * (float)raio_furo, 2*(float)raio_furo);   
                 }
                 f += n_furos;
