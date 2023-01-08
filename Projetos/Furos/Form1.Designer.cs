@@ -92,9 +92,12 @@
             this.label13 = new System.Windows.Forms.Label();
             this.pictureBox12 = new System.Windows.Forms.PictureBox();
             this.groupBox7 = new System.Windows.Forms.GroupBox();
-            this.check_rot = new System.Windows.Forms.CheckBox();
             this.button5 = new System.Windows.Forms.Button();
+            this.pictureBox16 = new System.Windows.Forms.PictureBox();
             this.pictureBox14 = new System.Windows.Forms.PictureBox();
+            this.Picture_Tela = new System.Windows.Forms.PictureBox();
+            this.button3 = new System.Windows.Forms.Button();
+            this.check_girar = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -115,7 +118,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox11)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox12)).BeginInit();
             this.groupBox7.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox16)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox14)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Picture_Tela)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -160,7 +165,7 @@
             this.text_y.Name = "text_y";
             this.text_y.Size = new System.Drawing.Size(51, 20);
             this.text_y.TabIndex = 4;
-            this.text_y.Text = "0";
+            this.text_y.Text = "100";
             this.text_y.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label2
@@ -189,7 +194,7 @@
             this.text_x.Name = "text_x";
             this.text_x.Size = new System.Drawing.Size(51, 20);
             this.text_x.TabIndex = 1;
-            this.text_x.Text = "0";
+            this.text_x.Text = "100";
             this.text_x.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label1
@@ -439,7 +444,7 @@
             this.text_dia_f.Name = "text_dia_f";
             this.text_dia_f.Size = new System.Drawing.Size(60, 20);
             this.text_dia_f.TabIndex = 15;
-            this.text_dia_f.Text = "3";
+            this.text_dia_f.Text = "10";
             this.text_dia_f.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // pictureBox3
@@ -720,7 +725,7 @@
             // 
             // text_quant
             // 
-            this.text_quant.Location = new System.Drawing.Point(163, 59);
+            this.text_quant.Location = new System.Drawing.Point(163, 79);
             this.text_quant.Name = "text_quant";
             this.text_quant.Size = new System.Drawing.Size(51, 20);
             this.text_quant.TabIndex = 12;
@@ -730,7 +735,7 @@
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(92, 62);
+            this.label12.Location = new System.Drawing.Point(92, 82);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(65, 13);
             this.label12.TabIndex = 11;
@@ -739,17 +744,17 @@
             // 
             // text_raio
             // 
-            this.text_raio.Location = new System.Drawing.Point(163, 36);
+            this.text_raio.Location = new System.Drawing.Point(163, 56);
             this.text_raio.Name = "text_raio";
             this.text_raio.Size = new System.Drawing.Size(51, 20);
             this.text_raio.TabIndex = 10;
-            this.text_raio.Text = "15";
+            this.text_raio.Text = "50";
             this.text_raio.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(125, 38);
+            this.label13.Location = new System.Drawing.Point(125, 58);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(32, 13);
             this.label13.TabIndex = 9;
@@ -770,31 +775,21 @@
             // 
             // groupBox7
             // 
-            this.groupBox7.Controls.Add(this.pictureBox14);
-            this.groupBox7.Controls.Add(this.check_rot);
+            this.groupBox7.Controls.Add(this.check_girar);
             this.groupBox7.Controls.Add(this.button5);
             this.groupBox7.Controls.Add(this.label13);
-            this.groupBox7.Controls.Add(this.pictureBox12);
             this.groupBox7.Controls.Add(this.text_raio);
             this.groupBox7.Controls.Add(this.label12);
             this.groupBox7.Controls.Add(this.text_quant);
+            this.groupBox7.Controls.Add(this.pictureBox12);
+            this.groupBox7.Controls.Add(this.pictureBox16);
+            this.groupBox7.Controls.Add(this.pictureBox14);
             this.groupBox7.Location = new System.Drawing.Point(363, 13);
             this.groupBox7.Name = "groupBox7";
             this.groupBox7.Size = new System.Drawing.Size(220, 141);
             this.groupBox7.TabIndex = 25;
             this.groupBox7.TabStop = false;
             this.groupBox7.Text = "Matriz Circular";
-            // 
-            // check_rot
-            // 
-            this.check_rot.AutoSize = true;
-            this.check_rot.Location = new System.Drawing.Point(92, 97);
-            this.check_rot.Name = "check_rot";
-            this.check_rot.Size = new System.Drawing.Size(117, 17);
-            this.check_rot.TabIndex = 21;
-            this.check_rot.Text = "Rotacionar em  90°";
-            this.check_rot.UseVisualStyleBackColor = true;
-            this.check_rot.CheckedChanged += new System.EventHandler(this.check_rot_CheckedChanged);
             // 
             // button5
             // 
@@ -805,6 +800,19 @@
             this.button5.Text = "&Adicionar";
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.button5_Click);
+            // 
+            // pictureBox16
+            // 
+            this.pictureBox16.ErrorImage = null;
+            this.pictureBox16.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox16.Image")));
+            this.pictureBox16.InitialImage = null;
+            this.pictureBox16.Location = new System.Drawing.Point(11, 78);
+            this.pictureBox16.Name = "pictureBox16";
+            this.pictureBox16.Size = new System.Drawing.Size(53, 49);
+            this.pictureBox16.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox16.TabIndex = 31;
+            this.pictureBox16.TabStop = false;
+            this.pictureBox16.Visible = false;
             // 
             // pictureBox14
             // 
@@ -819,11 +827,43 @@
             this.pictureBox14.TabStop = false;
             this.pictureBox14.Visible = false;
             // 
+            // Picture_Tela
+            // 
+            this.Picture_Tela.BackColor = System.Drawing.Color.Black;
+            this.Picture_Tela.Location = new System.Drawing.Point(604, 42);
+            this.Picture_Tela.Name = "Picture_Tela";
+            this.Picture_Tela.Size = new System.Drawing.Size(600, 600);
+            this.Picture_Tela.TabIndex = 26;
+            this.Picture_Tela.TabStop = false;
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(651, 672);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(70, 25);
+            this.button3.TabIndex = 27;
+            this.button3.Text = "Desenhar";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
+            // 
+            // check_girar
+            // 
+            this.check_girar.AutoSize = true;
+            this.check_girar.Location = new System.Drawing.Point(95, 110);
+            this.check_girar.Name = "check_girar";
+            this.check_girar.Size = new System.Drawing.Size(78, 17);
+            this.check_girar.TabIndex = 32;
+            this.check_girar.Text = "Girar Bloco";
+            this.check_girar.UseVisualStyleBackColor = true;
+            this.check_girar.CheckedChanged += new System.EventHandler(this.check_girar_CheckedChanged);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(807, 815);
+            this.ClientSize = new System.Drawing.Size(1224, 815);
+            this.Controls.Add(this.button3);
+            this.Controls.Add(this.Picture_Tela);
             this.Controls.Add(this.groupBox7);
             this.Controls.Add(this.groupBox6);
             this.Controls.Add(this.pictureBox8);
@@ -837,6 +877,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "Form1";
             this.Text = "Furos";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
@@ -863,7 +904,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox12)).EndInit();
             this.groupBox7.ResumeLayout(false);
             this.groupBox7.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox16)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox14)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Picture_Tela)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -934,9 +977,12 @@
         private System.Windows.Forms.Button button6;
         private System.Windows.Forms.Button button7;
         private System.Windows.Forms.Button button8;
-        private System.Windows.Forms.CheckBox check_rot;
         private System.Windows.Forms.Button button9;
         private System.Windows.Forms.PictureBox pictureBox14;
+        private System.Windows.Forms.PictureBox Picture_Tela;
+        private System.Windows.Forms.PictureBox pictureBox16;
+        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.CheckBox check_girar;
     }
 }
 

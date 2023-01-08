@@ -225,8 +225,8 @@ namespace Furos
 
         private void button5_Click(object sender, EventArgs e)
         {
-            int AngIni = 0;
-            int AngFim = 360;
+            double AngIni = 0;
+            double AngFim = 360;
             decimal X1;
             decimal Y1;
             decimal X = Convert.ToDecimal(text_x.Text);
@@ -234,14 +234,25 @@ namespace Furos
             double f;
             decimal raio = Convert.ToDecimal(text_raio.Text);
             double n_furos = 360 / Convert.ToDouble(text_quant.Text);
+            decimal raio_furo = Convert.ToDecimal(text_dia_f.Text)/2;
+            double quant = Convert.ToDouble(text_quant.Text);
+            decimal local_x = Convert.ToDecimal(text_x.Text);
+            decimal local_y = Convert.ToDecimal(text_y.Text);
+            double giro = 0;
+
+            Graphics g = Picture_Tela.CreateGraphics();
+            Pen canela_Amarelo = new Pen(Color.Yellow, 1);
+            Brush Black = new SolidBrush(Color.Black);
+            
+            g.FillRectangle(Black , 0, 0, 500, 500);
 
             list_brocas.Items.Clear();
 
-            if (check_rot.Checked == true)
-            {
-                AngIni = 90;
-                AngFim = 450;
-            }
+            if(check_girar.Checked == true) giro = 360 / quant / 2;
+
+            AngIni = giro;
+            AngFim = 360+giro;
+
             f = AngIni;
             while (f < AngFim)
             {
@@ -249,6 +260,10 @@ namespace Furos
                     X1 = X + Convert.ToDecimal(Math.Cos(f * (Math.PI) / 180)) * raio;
                     Y1 = Y + Convert.ToDecimal(Math.Sin((180 - f) * (Math.PI) / 180)) * raio;
                     list_brocas.Items.Add(" X" + Math.Round(X1, 4) + " Y" + Math.Round(Y1, 4));
+
+                    PointF pnt1 = new PointF(50, 50);
+                    PointF pnt2 = new PointF((float)X1,(float)Y1);
+                    g.DrawEllipse(canela_Amarelo, (float)local_x + (float)X1 - (float)raio_furo, (float)local_y + (float)Y1 - (float)raio_furo, 2 * (float)raio_furo, 2*(float)raio_furo);   
                 }
                 f += n_furos;
             }
@@ -262,22 +277,28 @@ namespace Furos
             }
         }
 
-
-        private void check_rot_CheckedChanged(object sender, EventArgs e)
+        private void Form1_Load(object sender, EventArgs e)
         {
-            if (check_rot.Checked == true)
-            {
-                pictureBox14.Location = new Point(11, 79);
-                pictureBox12.Visible = false;
-                pictureBox14.Visible = true;
-            }
-            else
-            {
-                pictureBox12.Location = new Point(11, 79);
-                pictureBox12.Visible = true;
-                pictureBox14.Visible = false;
-            }
+            Picture_Tela.Width = 600;
+            Picture_Tela.Height = 600;
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            Graphics g = Picture_Tela.CreateGraphics();
+            //Brush P_Azul = new SolidBrush(Color.Blue);
+            Pen canela_Amarelo = new Pen (Color.Yellow,1);
+            //g.FillRectangle(Pincel, 10, 10, 50, 50);
+            //g.FillEllipse(Pincel, 80, 80, 50, 30);
             
+            PointF pnt1 = new PointF(100.0F, 100.0F);
+            PointF pnt2 = new PointF(500.0F, 200.0F);
+            g.DrawLine(canela_Amarelo, pnt1, pnt2);
+        }
+
+        private void check_girar_CheckedChanged(object sender, EventArgs e)
+        {
+            button5_Click(null, null);
         }
     }
 }
