@@ -15,25 +15,22 @@ namespace Furos
 {
     public partial class Form1 : Form
     {
+        decimal[,] Matriz = new decimal[50, 2];
+
         decimal x = 0;
         decimal y = 0;
         decimal z = 0;
-        //decimal passo = 0;
-        //decimal npasso = 0;
-        //decimal avanco = 0;
         decimal q = 0;
-        decimal i = 0;
-        decimal j = 0;
         decimal z_mergulho = 0;
         decimal retracao = 0;
         int quantidade_x = 0;
         int quantidade_y = 0;
-        int laco = 0;
+
         int c = 0;
         int l = 0;
-        //const decimal pi = 3.14159265358979;
+        
 
-        Boolean s = false;
+        //Boolean s = false;
 
         public Form1()
         {
@@ -76,12 +73,17 @@ namespace Furos
             //Brush Black = new SolidBrush(Color.Black);
 
             //g.FillRectangle(Black, 0, 0, 600, 600);
+            x = Convert.ToDecimal(text_x.Text);
+            y = Convert.ToDecimal(text_y.Text);
 
             text_x.Text = text_x.Text.Replace(",", ".");
             text_y.Text = text_y.Text.Replace(",", ".");
             list_brocas.Items.Add(" X" + text_x.Text + " Y" + text_y.Text);
             g.DrawEllipse(canela_Amarelo, (float)local_x + (float)x - (float)raio_furo, (float)local_y + (float)y - (float)raio_furo, 2 * (float)raio_furo, 2 * (float)raio_furo);
 
+            Matriz[0, 0] = x;
+            Matriz[0, 1] = y;
+            button3_Click(null, null);
         }
 
 
@@ -166,7 +168,6 @@ namespace Furos
 
             quantidade_x = Convert.ToInt32(text_q_x.Text);
             quantidade_y = Convert.ToInt32(text_q_y.Text);
-            laco = 0;
             c = 0;
             l = 0;
             for (l = 0; l < quantidade_y; l++)
@@ -180,12 +181,11 @@ namespace Furos
                 y = y + Convert.ToDecimal(text_inter_y.Text);
                 x = Convert.ToDecimal(text_x.Text);
             }
-
+            button3_Click(null, null);
         }
 
         private void list_brocas_SelectedIndexChanged(object sender, EventArgs e)
         {
-            s = true;
         }
 
         private void button6_Click(object sender, EventArgs e)
@@ -298,6 +298,7 @@ namespace Furos
                 }
                 f += n_furos;
             }
+            button3_Click(null, null);
         }
 
         private void button9_Click(object sender, EventArgs e)
@@ -322,9 +323,21 @@ namespace Furos
             //g.FillRectangle(Pincel, 10, 10, 50, 50);
             //g.FillEllipse(Pincel, 80, 80, 50, 30);
             
-            PointF pnt1 = new PointF(100.0F, 100.0F);
-            PointF pnt2 = new PointF(500.0F, 200.0F);
+            PointF pnt1 = new PointF(10.0F, 10.0F);
+            PointF pnt2 = new PointF(590.0F, 10.0F);
             g.DrawLine(canela_Amarelo, pnt1, pnt2);
+            
+            PointF pnt3 = new PointF(590.0F, 10.0F);
+            PointF pnt4 = new PointF(590.0F, 590.0F);
+            g.DrawLine(canela_Amarelo, pnt3, pnt4);
+            
+            PointF pnt5 = new PointF(590.0F, 590.0F);
+            PointF pnt6 = new PointF(10.0F, 590.0F);
+            g.DrawLine(canela_Amarelo, pnt5, pnt6);
+            
+            PointF pnt7 = new PointF(10.0F, 590.0F);
+            PointF pnt8 = new PointF(10.0F, 10.0F);
+            g.DrawLine(canela_Amarelo, pnt7, pnt8);
         }
 
         private void check_girar_CheckedChanged(object sender, EventArgs e)
