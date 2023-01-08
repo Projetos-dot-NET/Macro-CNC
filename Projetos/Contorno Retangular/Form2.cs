@@ -3,6 +3,7 @@ using static System.Math;
 using static System.Convert;
 using static ContornoRetangular.Classes.Comandos;
 using ContornoRetangular.Classes;
+using System;
 
 namespace ContornoRetangular
 {
@@ -147,7 +148,7 @@ namespace ContornoRetangular
             text_y.Text = text_y.Text.Replace(".", ",");
             text_final_z.Text = text_final_z.Text.Replace(".", ",");
             text_aprox_z.Text = text_aprox_z.Text.Replace(".", ",");
-            text_Z_troca.Text = text_Z_troca.Text.Replace(".", ",");
+            
 
             //fazer o delocamento em X, Y e Z em segurança para a localização do bloco a usinar
             if (opc_mais.Checked == true && opc_externo.Checked == true)
@@ -322,16 +323,17 @@ namespace ContornoRetangular
         }
 
         private void btn_Cab_Click(object sender, EventArgs e) //Rotina para escrever o Cabeçalho para Mach3
-        {            
-            z = Convert.ToDecimal(text_Z_troca.Text.Replace(".", ","));
+        {
+            text_Z_troca.Text = text_Z_troca.Text.Replace(".", ",");
+            z = Convert.ToDecimal(text_Z_troca.Text);
             var zPonto = Round(z, 4).ToString().Replace(",", ".");
-
             text_codigo.Text = Comandos.InserirCabecalho(zPonto);
         }
 
         private void btn_Rod_Click(object sender, EventArgs e) //Rotina para escrever o Rodapé para Mach3
         {
-            z = Convert.ToDecimal(text_Z_troca.Text.Replace(".", ","));
+            text_Z_troca.Text = text_Z_troca.Text.Replace(".", ",");
+            z = Convert.ToDecimal(text_Z_troca.Text);
             var zPonto = Round(z, 4).ToString().Replace(",", ".");
             text_codigo.Text += InserirRodape(zPonto);
         }
