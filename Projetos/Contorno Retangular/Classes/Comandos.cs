@@ -4,7 +4,7 @@ namespace ContornoRetangular.Classes
 {
     public static class Comandos
     {
-        public static string InserirCabecalho(decimal z)
+        public static string InserirCabecalho(string z)
         {
             var cabecalho = "G17 G21 G90 (Plano XY - metrico - absoluto)" + NewLine +
                             "G0 Z" + z + " (Z para troca de ferramenta )" + NewLine +
@@ -18,7 +18,7 @@ namespace ContornoRetangular.Classes
             return cabecalho;
         }
 
-        public static string InserirRodape(decimal z)
+        public static string InserirRodape(string z)
         {
             var rodape = "G0 Z" + z + " (Z para troca de ferramenta )" + NewLine +
                          "M5" + NewLine +

@@ -323,14 +323,17 @@ namespace ContornoRetangular
 
         private void btn_Cab_Click(object sender, EventArgs e) //Rotina para escrever o Cabeçalho para Mach3
         {            
-            z = Convert.ToDecimal(text_Z_troca.Text);
-            text_codigo.Text = Comandos.InserirCabecalho(Round(z, 4));
+            z = Convert.ToDecimal(text_Z_troca.Text.Replace(".", ","));
+            var zPonto = Round(z, 4).ToString().Replace(",", ".");
+
+            text_codigo.Text = Comandos.InserirCabecalho(zPonto);
         }
 
         private void btn_Rod_Click(object sender, EventArgs e) //Rotina para escrever o Rodapé para Mach3
         {
-            z = Convert.ToDecimal(text_Z_troca.Text);
-            text_codigo.Text += InserirRodape(Round(z, 4));
+            z = Convert.ToDecimal(text_Z_troca.Text.Replace(".", ","));
+            var zPonto = Round(z, 4).ToString().Replace(",", ".");
+            text_codigo.Text += InserirRodape(zPonto);
         }
 
         private void btn_ok_Click(object sender, EventArgs e) //Chamada da interface pelo botão de salvar
