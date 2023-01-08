@@ -67,9 +67,21 @@ namespace Furos
 
         private void button1_Click(object sender, EventArgs e)
         {
+            decimal local_x = Convert.ToDecimal(text_x.Text);
+            decimal local_y = Convert.ToDecimal(text_y.Text);
+            decimal raio_furo = Convert.ToDecimal(text_dia_f.Text) / 2;
+
+            Graphics g = Picture_Tela.CreateGraphics();
+            Pen canela_Amarelo = new Pen(Color.Yellow, 1);
+            //Brush Black = new SolidBrush(Color.Black);
+
+            //g.FillRectangle(Black, 0, 0, 600, 600);
+
             text_x.Text = text_x.Text.Replace(",", ".");
             text_y.Text = text_y.Text.Replace(",", ".");
             list_brocas.Items.Add(" X" + text_x.Text + " Y" + text_y.Text);
+            g.DrawEllipse(canela_Amarelo, (float)local_x + (float)x - (float)raio_furo, (float)local_y + (float)y - (float)raio_furo, 2 * (float)raio_furo, 2 * (float)raio_furo);
+
         }
 
 
@@ -178,6 +190,9 @@ namespace Furos
 
         private void button6_Click(object sender, EventArgs e)
         {
+            Graphics g = Picture_Tela.CreateGraphics();
+            Brush Black = new SolidBrush(Color.Black);
+
             if (list_brocas.Items.Count > 0)
             {
                 DialogResult Result = MessageBox.Show("Deseja apagar Todos os Item da lista", "Atenção",
@@ -185,6 +200,7 @@ namespace Furos
                 if (Result == DialogResult.Yes)
                 {
                     list_brocas.Items.Clear();
+                    g.FillRectangle(Black, 0, 0, 600, 600);
                 }
             }
             else
