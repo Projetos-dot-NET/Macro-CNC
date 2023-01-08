@@ -125,6 +125,23 @@ namespace Furos
 
         private void button4_Click(object sender, EventArgs e)
         {
+            decimal quant_x = Convert.ToDecimal(text_q_x.Text); 
+            decimal quant_y = Convert.ToDecimal(text_q_y.Text);
+            decimal intervalo_x = Convert.ToDecimal(text_inter_x.Text);
+            decimal intervalo_y = Convert.ToDecimal(text_inter_y.Text);
+            decimal local_x = Convert.ToDecimal(text_x.Text);
+            decimal local_y = Convert.ToDecimal(text_y.Text);
+            decimal raio_furo = Convert.ToDecimal(text_dia_f.Text) / 2;
+
+
+
+            Graphics g = Picture_Tela.CreateGraphics();
+            Pen canela_Amarelo = new Pen(Color.Yellow, 1);
+            Brush Black = new SolidBrush(Color.Black);
+
+            g.FillRectangle(Black, 0, 0, 600, 600);
+
+
             list_brocas.Items.Clear();
             text_q_x.Text = text_q_x.Text.Replace(",", ".");
             text_q_y.Text = text_q_y.Text.Replace(",", ".");
@@ -135,7 +152,6 @@ namespace Furos
             x = Convert.ToDecimal(text_x.Text);
             y = Convert.ToDecimal(text_y.Text);
 
-            //list_brocas.Items.Add(" X" + Math.Round(x,4) + " Y" + Math.Round(y,4));
             quantidade_x = Convert.ToInt32(text_q_x.Text);
             quantidade_y = Convert.ToInt32(text_q_y.Text);
             laco = 0;
@@ -146,6 +162,7 @@ namespace Furos
                 for (c = 0; c < quantidade_x; c++)
                 {
                     list_brocas.Items.Add(" X" + Math.Round(x, 4) + " Y" + Math.Round(y, 4));
+                    g.DrawEllipse(canela_Amarelo, (float)local_x + (float)x - (float)raio_furo, (float)local_y + (float)y - (float)raio_furo, 2 * (float)raio_furo, 2 * (float)raio_furo);
                     x = x + Convert.ToDecimal(text_inter_x.Text);
                 }
                 y = y + Convert.ToDecimal(text_inter_y.Text);
@@ -244,7 +261,7 @@ namespace Furos
             Pen canela_Amarelo = new Pen(Color.Yellow, 1);
             Brush Black = new SolidBrush(Color.Black);
             
-            g.FillRectangle(Black , 0, 0, 500, 500);
+            g.FillRectangle(Black , 0, 0, 600, 600);
 
             list_brocas.Items.Clear();
 
