@@ -11,12 +11,11 @@ namespace ContornoRetangular
 
     public partial class Form2 : Form
     {
-        decimal x = 0;
-        decimal y = 0;
-        decimal z = 0;
+        decimal valorX = 0;
+        decimal valorY = 0;
+        decimal valorZ = 0;
         decimal ajuste_x =0;
         decimal ajuste_y =0;
-        decimal passo = 0;
         decimal npasso = 0;
 
         /// objeto do tipo FolderBrowserDialog. Utilizado na interação do sistema
@@ -135,12 +134,12 @@ namespace ContornoRetangular
         
         private void btn_escreve_Click(object sender, EventArgs e) //Rotina para escrever o codigo CNC de usinagem
         {
-            
+            //pré-validação
             text_dist_x.Text = text_dist_x.Text.Replace(".",",");
             text_dist_y.Text = text_dist_y.Text.Replace(".",",");
             text_dia_fresa.Text = text_dia_fresa.Text.Replace(".",",");
             text_av_vertical.Text = text_av_vertical.Text.Replace(".",",");
-            text_seg.Text = text_mergulho.Text.Replace(".", ",");
+            text_seg.Text = text_seg.Text.Replace(".", ",");
             text_mergulho.Text = text_mergulho.Text.Replace(".", ",");
             text_avanco.Text = text_avanco.Text.Replace(".", ",");
             text_ajuste.Text = text_ajuste.Text.Replace(".", ",");
@@ -148,170 +147,176 @@ namespace ContornoRetangular
             text_y.Text = text_y.Text.Replace(".", ",");
             text_final_z.Text = text_final_z.Text.Replace(".", ",");
             text_aprox_z.Text = text_aprox_z.Text.Replace(".", ",");
-            
+
+            //conversões
+            var distX = ToDecimal(text_dist_x.Text);
+            var distY = ToDecimal(text_dist_y.Text);
+            var diaFresa = ToDecimal(text_dia_fresa.Text);
+            var ajuste = ToDecimal(text_ajuste.Text);
+            var avaVertical = ToDecimal(text_av_vertical.Text);
+            var alturaY = ToDecimal(text_y.Text);
+            var compX = ToDecimal(text_x.Text);
+            var finalZ = ToDecimal(text_final_z.Text);
+            var aproxZ = ToDecimal(text_aprox_z.Text);
+            var avanco = ToDecimal(text_avanco.Text);
+            var mergulho = ToDecimal(text_mergulho.Text);
 
             //fazer o delocamento em X, Y e Z em segurança para a localização do bloco a usinar
             if (opc_mais.Checked == true && opc_externo.Checked == true)
             {
-                
-                ajuste_x = ToDecimal(text_dist_x.Text) - (ToDecimal(text_dia_fresa.Text) / 2 + ToDecimal(text_ajuste.Text)/2);
-                ajuste_y = ToDecimal(text_dist_y.Text) - (ToDecimal(text_dia_fresa.Text) / 2 + ToDecimal(text_ajuste.Text)/2);
+                ajuste_x = distX - (diaFresa/2 + ajuste/2);
+                ajuste_y = distY - (diaFresa/2 + ajuste/2);
             }
-
             if (opc_menos.Checked == true && opc_externo.Checked == true)
             {
-                ajuste_x = ToDecimal(text_dist_x.Text) - (ToDecimal(text_dia_fresa.Text) / 2 - ToDecimal(text_ajuste.Text)/2);
-                ajuste_y = ToDecimal(text_dist_y.Text) - (ToDecimal(text_dia_fresa.Text) / 2 - ToDecimal(text_ajuste.Text)/2);
+                ajuste_x = distX - (diaFresa/2 - ajuste/2);
+                ajuste_y = distY - (diaFresa/2 - ajuste/2);
             }
             if (opc_mais.Checked == true && opc_interno.Checked == true)
             {
-                ajuste_x = ToDecimal(text_dist_x.Text) + (ToDecimal(text_dia_fresa.Text) / 2 + ToDecimal(text_ajuste.Text)/2);
-                ajuste_y = ToDecimal(text_dist_y.Text) + (ToDecimal(text_dia_fresa.Text) / 2 + ToDecimal(text_ajuste.Text)/2);
+                ajuste_x = distX + (diaFresa/2 + ajuste/2);
+                ajuste_y = distY + (diaFresa/2 + ajuste/2);
             }
-
             if (opc_menos.Checked == true && opc_interno.Checked == true)
             {
-                ajuste_x = ToDecimal(text_dist_x.Text) + (ToDecimal(text_dia_fresa.Text) / 2 - ToDecimal(text_ajuste.Text)/2);
-                ajuste_y = ToDecimal(text_dist_y.Text) + (ToDecimal(text_dia_fresa.Text) / 2 - ToDecimal(text_ajuste.Text)/2);
+                ajuste_x = distX + (diaFresa/2 - ajuste/2);
+                ajuste_y = distY + (diaFresa/2 - ajuste/2);
             }
 
-            x = ajuste_x;
-            y = ajuste_y;
-            text_codigo.Text = text_codigo.Text + "G0 X " + Round(ajuste_x,4) + " Y " + Round(ajuste_y,4) + Environment.NewLine ;
-            npasso = ToDecimal(text_final_z.Text) / ToDecimal(text_av_vertical.Text);
-            npasso = Ceiling(npasso);
-            passo = ToDecimal(text_final_z.Text) / ToDecimal(npasso); 
-
-            z = ToDecimal(text_aprox_z.Text);
+            valorX = ajuste_x;
+            valorY = ajuste_y;
+            text_codigo.Text += "G0 X " + Round(ajuste_x,4) + " Y " + Round(ajuste_y,4) + Environment.NewLine ;
+            npasso = Ceiling(finalZ / avaVertical);
+            valorZ = finalZ / npasso; 
+                        
+            text_codigo.Text += "G0 Z " + Round(aproxZ, 4) + Environment.NewLine;
             
-            text_codigo.Text = text_codigo.Text + "G0 Z " + Round(z, 4) + Environment.NewLine;
-            
-            z = passo;
-
             for (int f = 0; f < npasso; f++)
             {
-                text_codigo.Text = text_codigo.Text + "G1 Z-" + Round(z, 4) + " F " + ToDecimal(text_mergulho.Text) + Environment.NewLine;
-                z = z + passo;
+                text_codigo.Text += "G1 Z-" + Round(valorZ, 4) + " F " + mergulho + Environment.NewLine;
+
+                valorZ = valorZ + valorZ;
+
                 //Usinar no sentido concordante interno ou interno mais ajuste
                 if (opc_interno.Checked == true && opc_concordante.Checked == true && opc_mais.Checked == true)
                 {
-                    y = y + ToDecimal(text_y.Text) - ToDecimal(text_dia_fresa.Text) - ToDecimal(text_ajuste.Text);
-                    text_codigo.Text = text_codigo.Text + "G1 X " + Round(x, 4) + " Y " + Round(y, 4) + " F " + ToDecimal(text_avanco.Text) + Environment.NewLine;
+                    valorY = valorY + alturaY - diaFresa - ajuste;
+                    text_codigo.Text += "G1 X " + Round(valorX, 4) + " Y " + Round(valorY, 4) + " F " + avanco + Environment.NewLine;
 
-                    x = x + ToDecimal(text_x.Text) - ToDecimal(text_dia_fresa.Text) - ToDecimal(text_ajuste.Text);
-                    text_codigo.Text = text_codigo.Text + "G1 X " + Round(x, 4) + " Y " + Round(y, 4) + Environment.NewLine;
+                    valorX = valorX + compX - diaFresa - ajuste;
+                    text_codigo.Text += "G1 X " + Round(valorX, 4) + " Y " + Round(valorY, 4) + Environment.NewLine;
 
-                    y = y - ToDecimal(text_y.Text) + ToDecimal(text_dia_fresa.Text) + ToDecimal(text_ajuste.Text);
-                    text_codigo.Text = text_codigo.Text + "G1 X " + Round(x, 4) + " Y " + Round(y, 4) + Environment.NewLine;
+                    valorY = valorY - alturaY + diaFresa + ajuste;
+                    text_codigo.Text += "G1 X " + Round(valorX, 4) + " Y " + Round(valorY, 4) + Environment.NewLine;
 
-                    x = x - ToDecimal(text_x.Text) + ToDecimal(text_dia_fresa.Text) + ToDecimal(text_ajuste.Text);
-                    text_codigo.Text = text_codigo.Text + "G1 X " + Round(x, 4) + " Y " + Round(y, 4) + Environment.NewLine;
+                    valorX = valorX - compX + diaFresa + ajuste;
+                    text_codigo.Text += "G1 X " + Round(valorX, 4) + " Y " + Round(valorY, 4) + Environment.NewLine;
                  }
                 if (opc_externo.Checked == true && opc_concordante.Checked == true && opc_mais.Checked == true)
                 {
-                    y = y + ToDecimal(text_y.Text) + ToDecimal(text_dia_fresa.Text) + ToDecimal(text_ajuste.Text);
-                    text_codigo.Text = text_codigo.Text + "G1 X " + Round(x, 4) + " Y " + Round(y, 4) + " F " + ToDecimal(text_avanco.Text) + Environment.NewLine;
+                    valorY = valorY + alturaY + diaFresa + ajuste;
+                    text_codigo.Text += "G1 X " + Round(valorX, 4) + " Y " + Round(valorY, 4) + " F " + avanco + Environment.NewLine;
 
-                    x = x + ToDecimal(text_x.Text) + ToDecimal(text_dia_fresa.Text) + ToDecimal(text_ajuste.Text);
-                    text_codigo.Text = text_codigo.Text + "G1 X " + Round(x, 4) + " Y " + Round(y, 4) + Environment.NewLine;
+                    valorX = valorX + compX + diaFresa + ajuste;
+                    text_codigo.Text += "G1 X " + Round(valorX, 4) + " Y " + Round(valorY, 4) + Environment.NewLine;
 
-                    y = y - ToDecimal(text_y.Text) - ToDecimal(text_dia_fresa.Text) - ToDecimal(text_ajuste.Text);
-                    text_codigo.Text = text_codigo.Text + "G1 X " + Round(x, 4) + " Y " + Round(y, 4) + Environment.NewLine;
+                    valorY = valorY - alturaY - diaFresa - ajuste;
+                    text_codigo.Text += "G1 X " + Round(valorX, 4) + " Y " + Round(valorY, 4) + Environment.NewLine;
 
-                    x = x - ToDecimal(text_x.Text) - ToDecimal(text_dia_fresa.Text) - ToDecimal(text_ajuste.Text);
-                    text_codigo.Text = text_codigo.Text + "G1 X " + Round(x, 4) + " Y " + Round(y, 4) + Environment.NewLine;
+                    valorX = valorX - compX - diaFresa - ajuste;
+                    text_codigo.Text += "G1 X " + Round(valorX, 4) + " Y " + Round(valorY, 4) + Environment.NewLine;
                 }
+
                 //Usinar no sentido concordante interno ou interno menos ajuste
                 if (opc_interno.Checked == true && opc_concordante.Checked == true && opc_menos.Checked == true)
                 {
-                    y = y + ToDecimal(text_y.Text) - ToDecimal(text_dia_fresa.Text) + ToDecimal(text_ajuste.Text);
-                    text_codigo.Text = text_codigo.Text + "G1 X " + Round(x, 4) + " Y " + Round(y, 4) + " F " + ToDecimal(text_avanco.Text) + Environment.NewLine;
+                    valorY = valorY + alturaY - diaFresa + ajuste;
+                    text_codigo.Text += "G1 X " + Round(valorX, 4) + " Y " + Round(valorY, 4) + " F " + avanco + Environment.NewLine;
 
-                    x = x + ToDecimal(text_x.Text) - ToDecimal(text_dia_fresa.Text) + ToDecimal(text_ajuste.Text);
-                    text_codigo.Text = text_codigo.Text + "G1 X " + Round(x, 4) + " Y " + Round(y, 4) + Environment.NewLine;
+                    valorX = valorX + compX - diaFresa + ajuste;
+                    text_codigo.Text += "G1 X " + Round(valorX, 4) + " Y " + Round(valorY, 4) + Environment.NewLine;
 
-                    y = y - ToDecimal(text_y.Text) + ToDecimal(text_dia_fresa.Text) - ToDecimal(text_ajuste.Text);
-                    text_codigo.Text = text_codigo.Text + "G1 X " + Round(x, 4) + " Y " + Round(y, 4) + Environment.NewLine;
+                    valorY = valorY - alturaY + diaFresa - ajuste;
+                    text_codigo.Text += "G1 X " + Round(valorX, 4) + " Y " + Round(valorY, 4) + Environment.NewLine;
 
-                    x = x - ToDecimal(text_x.Text) + ToDecimal(text_dia_fresa.Text) - ToDecimal(text_ajuste.Text);
-                    text_codigo.Text = text_codigo.Text + "G1 X " + Round(x, 4) + " Y " + Round(y, 4) + Environment.NewLine;
+                    valorX = valorX - compX + diaFresa - ajuste;
+                    text_codigo.Text += "G1 X " + Round(valorX, 4) + " Y " + Round(valorY, 4) + Environment.NewLine;
                 }
                 if (opc_externo.Checked == true && opc_concordante.Checked == true && opc_menos.Checked == true)
                 {
-                    y = y + ToDecimal(text_y.Text) + ToDecimal(text_dia_fresa.Text) - ToDecimal(text_ajuste.Text);
-                    text_codigo.Text = text_codigo.Text + "G1 X " + Round(x, 4) + " Y " + Round(y, 4) + " F " + ToDecimal(text_avanco.Text) + Environment.NewLine;
+                    valorY = valorY + alturaY + diaFresa - ajuste;
+                    text_codigo.Text += "G1 X " + Round(valorX, 4) + " Y " + Round(valorY, 4) + " F " + avanco + Environment.NewLine;
 
-                    x = x + ToDecimal(text_x.Text) + ToDecimal(text_dia_fresa.Text) - ToDecimal(text_ajuste.Text);
-                    text_codigo.Text = text_codigo.Text + "G1 X " + Round(x, 4) + " Y " + Round(y, 4) + Environment.NewLine;
+                    valorX = valorX + compX + diaFresa - ajuste;
+                    text_codigo.Text += "G1 X " + Round(valorX, 4) + " Y " + Round(valorY, 4) + Environment.NewLine;
 
-                    y = y - ToDecimal(text_y.Text) - ToDecimal(text_dia_fresa.Text) + ToDecimal(text_ajuste.Text);
-                    text_codigo.Text = text_codigo.Text + "G1 X " + Round(x, 4) + " Y " + Round(y, 4) + Environment.NewLine;
+                    valorY = valorY - alturaY - diaFresa + ajuste;
+                    text_codigo.Text += "G1 X " + Round(valorX, 4) + " Y " + Round(valorY, 4) + Environment.NewLine;
 
-                    x = x - ToDecimal(text_x.Text) - ToDecimal(text_dia_fresa.Text) + ToDecimal(text_ajuste.Text);
-                    text_codigo.Text = text_codigo.Text + "G1 X " + Round(x, 4) + " Y " + Round(y, 4) + Environment.NewLine;
+                    valorX = valorX - compX - diaFresa + ajuste;
+                    text_codigo.Text += "G1 X " + Round(valorX, 4) + " Y " + Round(valorY, 4) + Environment.NewLine;
                 }
-
-
 
                 //Usinar no sentido discordante interno ou externo mais ajuste
                 if (opc_interno.Checked == true && opc_discordante.Checked == true && opc_mais.Checked == true)
                 {
-                    x = x + ToDecimal(text_x.Text) - ToDecimal(text_dia_fresa.Text) + ToDecimal(text_ajuste.Text);
-                    text_codigo.Text = text_codigo.Text + "G1 X " + Round(x, 4) + " Y " + Round(y, 4) + " F " + ToDecimal(text_avanco.Text) + Environment.NewLine;
+                    valorX = valorX + compX - diaFresa + ajuste;
+                    text_codigo.Text += "G1 X " + Round(valorX, 4) + " Y " + Round(valorY, 4) + " F " + avanco + Environment.NewLine;
 
-                    y = y + ToDecimal(text_y.Text) - ToDecimal(text_dia_fresa.Text) + ToDecimal(text_ajuste.Text);
-                    text_codigo.Text = text_codigo.Text + "G1 X " + Round(x, 4) + " Y " + Round(y, 4) + Environment.NewLine;
+                    valorY = valorY + alturaY - diaFresa + ajuste;
+                    text_codigo.Text += "G1 X " + Round(valorX, 4) + " Y " + Round(valorY, 4) + Environment.NewLine;
 
-                    x = x - ToDecimal(text_x.Text) + ToDecimal(text_dia_fresa.Text) - ToDecimal(text_ajuste.Text);
-                    text_codigo.Text = text_codigo.Text + "G1 X " + Round(x, 4) + " Y " + Round(y, 4) + Environment.NewLine;
+                    valorX = valorX - compX + diaFresa - ajuste;
+                    text_codigo.Text += "G1 X " + Round(valorX, 4) + " Y " + Round(valorY, 4) + Environment.NewLine;
 
-                    y = y - ToDecimal(text_y.Text) + ToDecimal(text_dia_fresa.Text) - ToDecimal(text_ajuste.Text);
-                    text_codigo.Text = text_codigo.Text + "G1 X " + Round(x, 4) + " Y " + Round(y, 4) + Environment.NewLine;
+                    valorY = valorY - alturaY + diaFresa - ajuste;
+                    text_codigo.Text += "G1 X " + Round(valorX, 4) + " Y " + Round(valorY, 4) + Environment.NewLine;
 
                 }
                 if (opc_externo.Checked == true && opc_discordante.Checked == true && opc_mais.Checked == true)
                 {
-                    x = x + ToDecimal(text_x.Text) + ToDecimal(text_dia_fresa.Text) - ToDecimal(text_ajuste.Text);
-                    text_codigo.Text = text_codigo.Text + "G1 X " + Round(x, 4) + " Y " + Round(y, 4) + " F " + ToDecimal(text_avanco.Text) + Environment.NewLine;
+                    valorX = valorX + compX + diaFresa - ajuste;
+                    text_codigo.Text += "G1 X " + Round(valorX, 4) + " Y " + Round(valorY, 4) + " F " + avanco + Environment.NewLine;
 
-                    y = y + ToDecimal(text_y.Text) + ToDecimal(text_dia_fresa.Text) - ToDecimal(text_ajuste.Text);
-                    text_codigo.Text = text_codigo.Text + "G1 X " + Round(x, 4) + " Y " + Round(y, 4) + Environment.NewLine;
+                    valorY = valorY + alturaY + diaFresa - ajuste;
+                    text_codigo.Text += "G1 X " + Round(valorX, 4) + " Y " + Round(valorY, 4) + Environment.NewLine;
 
-                    x = x - ToDecimal(text_x.Text) - ToDecimal(text_dia_fresa.Text) + ToDecimal(text_ajuste.Text);
-                    text_codigo.Text = text_codigo.Text + "G1 X " + Round(x, 4) + " Y " + Round(y, 4) + Environment.NewLine;
+                    valorX = valorX - compX - diaFresa + ajuste;
+                    text_codigo.Text += "G1 X " + Round(valorX, 4) + " Y " + Round(valorY, 4) + Environment.NewLine;
 
-                    y = y - ToDecimal(text_y.Text) - ToDecimal(text_dia_fresa.Text) + ToDecimal(text_ajuste.Text);
-                    text_codigo.Text = text_codigo.Text + "G1 X " + Round(x, 4) + " Y " + Round(y, 4) + Environment.NewLine;
+                    valorY = valorY - alturaY - diaFresa + ajuste;
+                    text_codigo.Text += "G1 X " + Round(valorX, 4) + " Y " + Round(valorY, 4) + Environment.NewLine;
                 }
+                
                 //Usinar no sentido discordante interno ou externo menos ajuste
                 if (opc_interno.Checked == true && opc_discordante.Checked == true && opc_menos.Checked == true)
                 {
-                    x = x + ToDecimal(text_x.Text) - ToDecimal(text_dia_fresa.Text) - ToDecimal(text_ajuste.Text);
-                    text_codigo.Text = text_codigo.Text + "G1 X " + Round(x, 4) + " Y " + Round(y, 4) + " F " + ToDecimal(text_avanco.Text) + Environment.NewLine;
+                    valorX = valorX + compX - diaFresa - ajuste;
+                    text_codigo.Text += "G1 X " + Round(valorX, 4) + " Y " + Round(valorY, 4) + " F " + avanco + Environment.NewLine;
 
-                    y = y + ToDecimal(text_y.Text) - ToDecimal(text_dia_fresa.Text) - ToDecimal(text_ajuste.Text);
-                    text_codigo.Text = text_codigo.Text + "G1 X " + Round(x, 4) + " Y " + Round(y, 4) + Environment.NewLine;
+                    valorY = valorY + alturaY - diaFresa - ajuste;
+                    text_codigo.Text += "G1 X " + Round(valorX, 4) + " Y " + Round(valorY, 4) + Environment.NewLine;
 
-                    x = x - ToDecimal(text_x.Text) + ToDecimal(text_dia_fresa.Text) + ToDecimal(text_ajuste.Text);
-                    text_codigo.Text = text_codigo.Text + "G1 X " + Round(x, 4) + " Y " + Round(y, 4) + Environment.NewLine;
+                    valorX = valorX - compX + diaFresa + ajuste;
+                    text_codigo.Text += "G1 X " + Round(valorX, 4) + " Y " + Round(valorY, 4) + Environment.NewLine;
 
-                    y = y - ToDecimal(text_y.Text) + ToDecimal(text_dia_fresa.Text) + ToDecimal(text_ajuste.Text);
-                    text_codigo.Text = text_codigo.Text + "G1 X " + Round(x, 4) + " Y " + Round(y, 4) + Environment.NewLine;
+                    valorY = valorY - alturaY + diaFresa + ajuste;
+                    text_codigo.Text += "G1 X " + Round(valorX, 4) + " Y " + Round(valorY, 4) + Environment.NewLine;
 
                 }
                 if (opc_externo.Checked == true && opc_discordante.Checked == true && opc_menos.Checked == true)
                 {
-                    x = x + ToDecimal(text_x.Text) + ToDecimal(text_dia_fresa.Text) + ToDecimal(text_ajuste.Text);
-                    text_codigo.Text = text_codigo.Text + "G1 X " + Round(x, 4) + " Y " + Round(y, 4) + " F " + ToDecimal(text_avanco.Text) + Environment.NewLine;
+                    valorX = valorX + compX + diaFresa + ajuste;
+                    text_codigo.Text += "G1 X " + Round(valorX, 4) + " Y " + Round(valorY, 4) + " F " + avanco + Environment.NewLine;
 
-                    y = y + ToDecimal(text_y.Text) + ToDecimal(text_dia_fresa.Text) + ToDecimal(text_ajuste.Text);
-                    text_codigo.Text = text_codigo.Text + "G1 X " + Round(x, 4) + " Y " + Round(y, 4) + Environment.NewLine;
+                    valorY = valorY + alturaY + diaFresa + ajuste;
+                    text_codigo.Text += "G1 X " + Round(valorX, 4) + " Y " + Round(valorY, 4) + Environment.NewLine;
 
-                    x = x - ToDecimal(text_x.Text) - ToDecimal(text_dia_fresa.Text) - ToDecimal(text_ajuste.Text);
-                    text_codigo.Text = text_codigo.Text + "G1 X " + Round(x, 4) + " Y " + Round(y, 4) + Environment.NewLine;
+                    valorX = valorX - compX - diaFresa - ajuste;
+                    text_codigo.Text += "G1 X " + Round(valorX, 4) + " Y " + Round(valorY, 4) + Environment.NewLine;
 
-                    y = y - ToDecimal(text_y.Text) - ToDecimal(text_dia_fresa.Text) - ToDecimal(text_ajuste.Text);
-                    text_codigo.Text = text_codigo.Text + "G1 X " + Round(x, 4) + " Y " + Round(y, 4) + Environment.NewLine;
+                    valorY = valorY - alturaY - diaFresa - ajuste;
+                    text_codigo.Text += "G1 X " + Round(valorX, 4) + " Y " + Round(valorY, 4) + Environment.NewLine;
                 }
             }
             text_codigo.Text = text_codigo.Text.Replace(",", ".");
@@ -325,16 +330,16 @@ namespace ContornoRetangular
         private void btn_Cab_Click(object sender, EventArgs e) //Rotina para escrever o Cabeçalho para Mach3
         {
             text_Z_troca.Text = text_Z_troca.Text.Replace(".", ",");
-            z = Convert.ToDecimal(text_Z_troca.Text);
-            var zPonto = Round(z, 4).ToString().Replace(",", ".");
+            var tempZ = Convert.ToDecimal(text_Z_troca.Text);
+            var zPonto = Round(tempZ, 4).ToString().Replace(",", ".");
             text_codigo.Text = Comandos.InserirCabecalho(zPonto);
         }
 
         private void btn_Rod_Click(object sender, EventArgs e) //Rotina para escrever o Rodapé para Mach3
         {
             text_Z_troca.Text = text_Z_troca.Text.Replace(".", ",");
-            z = Convert.ToDecimal(text_Z_troca.Text);
-            var zPonto = Round(z, 4).ToString().Replace(",", ".");
+            var tempZ = Convert.ToDecimal(text_Z_troca.Text);
+            var zPonto = Round(tempZ, 4).ToString().Replace(",", ".");
             text_codigo.Text += InserirRodape(zPonto);
         }
 
