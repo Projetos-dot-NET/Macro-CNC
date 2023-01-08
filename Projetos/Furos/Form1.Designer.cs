@@ -92,12 +92,12 @@
             this.label13 = new System.Windows.Forms.Label();
             this.pictureBox12 = new System.Windows.Forms.PictureBox();
             this.groupBox7 = new System.Windows.Forms.GroupBox();
+            this.check_girar = new System.Windows.Forms.CheckBox();
             this.button5 = new System.Windows.Forms.Button();
             this.pictureBox16 = new System.Windows.Forms.PictureBox();
             this.pictureBox14 = new System.Windows.Forms.PictureBox();
             this.Picture_Tela = new System.Windows.Forms.PictureBox();
             this.button3 = new System.Windows.Forms.Button();
-            this.check_girar = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -276,6 +276,7 @@
             this.text_comando.Location = new System.Drawing.Point(302, 192);
             this.text_comando.Multiline = true;
             this.text_comando.Name = "text_comando";
+            this.text_comando.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.text_comando.Size = new System.Drawing.Size(284, 613);
             this.text_comando.TabIndex = 3;
             // 
@@ -791,6 +792,17 @@
             this.groupBox7.TabStop = false;
             this.groupBox7.Text = "Matriz Circular";
             // 
+            // check_girar
+            // 
+            this.check_girar.AutoSize = true;
+            this.check_girar.Location = new System.Drawing.Point(95, 110);
+            this.check_girar.Name = "check_girar";
+            this.check_girar.Size = new System.Drawing.Size(78, 17);
+            this.check_girar.TabIndex = 32;
+            this.check_girar.Text = "Girar Bloco";
+            this.check_girar.UseVisualStyleBackColor = true;
+            this.check_girar.CheckedChanged += new System.EventHandler(this.check_girar_CheckedChanged);
+            // 
             // button5
             // 
             this.button5.Location = new System.Drawing.Point(6, 17);
@@ -845,17 +857,6 @@
             this.button3.Text = "Desenhar";
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
-            // 
-            // check_girar
-            // 
-            this.check_girar.AutoSize = true;
-            this.check_girar.Location = new System.Drawing.Point(95, 110);
-            this.check_girar.Name = "check_girar";
-            this.check_girar.Size = new System.Drawing.Size(78, 17);
-            this.check_girar.TabIndex = 32;
-            this.check_girar.Text = "Girar Bloco";
-            this.check_girar.UseVisualStyleBackColor = true;
-            this.check_girar.CheckedChanged += new System.EventHandler(this.check_girar_CheckedChanged);
             // 
             // Form1
             // 

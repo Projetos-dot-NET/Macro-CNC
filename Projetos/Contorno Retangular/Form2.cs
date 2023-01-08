@@ -17,6 +17,7 @@ namespace ContornoRetangular
         decimal ajuste_x =0;
         decimal ajuste_y =0;
         decimal npasso = 0;
+        decimal passo = 0;
 
         /// objeto do tipo FolderBrowserDialog. Utilizado na interação do sistema
         /// com o usuário na hora da escolha do diretório da base de dados a ser
@@ -152,7 +153,7 @@ namespace ContornoRetangular
             var distX = ToDecimal(text_dist_x.Text);
             var distY = ToDecimal(text_dist_y.Text);
             var diaFresa = ToDecimal(text_dia_fresa.Text);
-            var ajuste = ToDecimal(text_ajuste.Text);
+            var ajusteUsinagem = ToDecimal(text_ajuste.Text);
             var avaVertical = ToDecimal(text_av_vertical.Text);
             var alturaY = ToDecimal(text_y.Text);
             var compX = ToDecimal(text_x.Text);
@@ -164,158 +165,162 @@ namespace ContornoRetangular
             //fazer o delocamento em X, Y e Z em segurança para a localização do bloco a usinar
             if (opc_mais.Checked == true && opc_externo.Checked == true)
             {
-                ajuste_x = distX - (diaFresa/2 + ajuste/2);
-                ajuste_y = distY - (diaFresa/2 + ajuste/2);
+                ajuste_x = distX - (diaFresa/2 + ajusteUsinagem/2);
+                ajuste_y = distY - (diaFresa/2 + ajusteUsinagem/2);
             }
             if (opc_menos.Checked == true && opc_externo.Checked == true)
             {
-                ajuste_x = distX - (diaFresa/2 - ajuste/2);
-                ajuste_y = distY - (diaFresa/2 - ajuste/2);
+                ajuste_x = distX - (diaFresa/2 - ajusteUsinagem/2);
+                ajuste_y = distY - (diaFresa/2 - ajusteUsinagem/2);
             }
             if (opc_mais.Checked == true && opc_interno.Checked == true)
             {
-                ajuste_x = distX + (diaFresa/2 + ajuste/2);
-                ajuste_y = distY + (diaFresa/2 + ajuste/2);
+                ajuste_x = distX + (diaFresa/2 + ajusteUsinagem/2);
+                ajuste_y = distY + (diaFresa/2 + ajusteUsinagem/2);
             }
             if (opc_menos.Checked == true && opc_interno.Checked == true)
             {
-                ajuste_x = distX + (diaFresa/2 - ajuste/2);
-                ajuste_y = distY + (diaFresa/2 - ajuste/2);
+                ajuste_x = distX + (diaFresa/2 - ajusteUsinagem/2);
+                ajuste_y = distY + (diaFresa/2 - ajusteUsinagem/2);
             }
 
             valorX = ajuste_x;
             valorY = ajuste_y;
             text_codigo.Text += "G0 X " + Round(ajuste_x,4) + " Y " + Round(ajuste_y,4) + Environment.NewLine ;
             npasso = Ceiling(finalZ / avaVertical);
-            valorZ = finalZ / npasso; 
-                        
-            text_codigo.Text += "G0 Z " + Round(aproxZ, 4) + Environment.NewLine;
+            passo = finalZ / npasso;
             
+            valorZ = aproxZ;
+
+            text_codigo.Text += "G0 Z " + Round(valorZ, 4) + Environment.NewLine;
+
+            valorZ = passo;
+
             for (int f = 0; f < npasso; f++)
             {
                 text_codigo.Text += "G1 Z-" + Round(valorZ, 4) + " F " + mergulho + Environment.NewLine;
 
-                valorZ = valorZ + valorZ;
+                valorZ = valorZ + passo;
 
                 //Usinar no sentido concordante interno ou interno mais ajuste
                 if (opc_interno.Checked == true && opc_concordante.Checked == true && opc_mais.Checked == true)
                 {
-                    valorY = valorY + alturaY - diaFresa - ajuste;
+                    valorY = valorY + alturaY - diaFresa - ajusteUsinagem;
                     text_codigo.Text += "G1 X " + Round(valorX, 4) + " Y " + Round(valorY, 4) + " F " + avanco + Environment.NewLine;
 
-                    valorX = valorX + compX - diaFresa - ajuste;
+                    valorX = valorX + compX - diaFresa - ajusteUsinagem;
                     text_codigo.Text += "G1 X " + Round(valorX, 4) + " Y " + Round(valorY, 4) + Environment.NewLine;
 
-                    valorY = valorY - alturaY + diaFresa + ajuste;
+                    valorY = valorY - alturaY + diaFresa + ajusteUsinagem;
                     text_codigo.Text += "G1 X " + Round(valorX, 4) + " Y " + Round(valorY, 4) + Environment.NewLine;
 
-                    valorX = valorX - compX + diaFresa + ajuste;
+                    valorX = valorX - compX + diaFresa + ajusteUsinagem;
                     text_codigo.Text += "G1 X " + Round(valorX, 4) + " Y " + Round(valorY, 4) + Environment.NewLine;
                  }
                 if (opc_externo.Checked == true && opc_concordante.Checked == true && opc_mais.Checked == true)
                 {
-                    valorY = valorY + alturaY + diaFresa + ajuste;
+                    valorY = valorY + alturaY + diaFresa + ajusteUsinagem;
                     text_codigo.Text += "G1 X " + Round(valorX, 4) + " Y " + Round(valorY, 4) + " F " + avanco + Environment.NewLine;
 
-                    valorX = valorX + compX + diaFresa + ajuste;
+                    valorX = valorX + compX + diaFresa + ajusteUsinagem;
                     text_codigo.Text += "G1 X " + Round(valorX, 4) + " Y " + Round(valorY, 4) + Environment.NewLine;
 
-                    valorY = valorY - alturaY - diaFresa - ajuste;
+                    valorY = valorY - alturaY - diaFresa - ajusteUsinagem;
                     text_codigo.Text += "G1 X " + Round(valorX, 4) + " Y " + Round(valorY, 4) + Environment.NewLine;
 
-                    valorX = valorX - compX - diaFresa - ajuste;
+                    valorX = valorX - compX - diaFresa - ajusteUsinagem;
                     text_codigo.Text += "G1 X " + Round(valorX, 4) + " Y " + Round(valorY, 4) + Environment.NewLine;
                 }
 
                 //Usinar no sentido concordante interno ou interno menos ajuste
                 if (opc_interno.Checked == true && opc_concordante.Checked == true && opc_menos.Checked == true)
                 {
-                    valorY = valorY + alturaY - diaFresa + ajuste;
+                    valorY = valorY + alturaY - diaFresa + ajusteUsinagem;
                     text_codigo.Text += "G1 X " + Round(valorX, 4) + " Y " + Round(valorY, 4) + " F " + avanco + Environment.NewLine;
 
-                    valorX = valorX + compX - diaFresa + ajuste;
+                    valorX = valorX + compX - diaFresa + ajusteUsinagem;
                     text_codigo.Text += "G1 X " + Round(valorX, 4) + " Y " + Round(valorY, 4) + Environment.NewLine;
 
-                    valorY = valorY - alturaY + diaFresa - ajuste;
+                    valorY = valorY - alturaY + diaFresa - ajusteUsinagem;
                     text_codigo.Text += "G1 X " + Round(valorX, 4) + " Y " + Round(valorY, 4) + Environment.NewLine;
 
-                    valorX = valorX - compX + diaFresa - ajuste;
+                    valorX = valorX - compX + diaFresa - ajusteUsinagem;
                     text_codigo.Text += "G1 X " + Round(valorX, 4) + " Y " + Round(valorY, 4) + Environment.NewLine;
                 }
                 if (opc_externo.Checked == true && opc_concordante.Checked == true && opc_menos.Checked == true)
                 {
-                    valorY = valorY + alturaY + diaFresa - ajuste;
+                    valorY = valorY + alturaY + diaFresa - ajusteUsinagem;
                     text_codigo.Text += "G1 X " + Round(valorX, 4) + " Y " + Round(valorY, 4) + " F " + avanco + Environment.NewLine;
 
-                    valorX = valorX + compX + diaFresa - ajuste;
+                    valorX = valorX + compX + diaFresa - ajusteUsinagem;
                     text_codigo.Text += "G1 X " + Round(valorX, 4) + " Y " + Round(valorY, 4) + Environment.NewLine;
 
-                    valorY = valorY - alturaY - diaFresa + ajuste;
+                    valorY = valorY - alturaY - diaFresa + ajusteUsinagem;
                     text_codigo.Text += "G1 X " + Round(valorX, 4) + " Y " + Round(valorY, 4) + Environment.NewLine;
 
-                    valorX = valorX - compX - diaFresa + ajuste;
+                    valorX = valorX - compX - diaFresa + ajusteUsinagem;
                     text_codigo.Text += "G1 X " + Round(valorX, 4) + " Y " + Round(valorY, 4) + Environment.NewLine;
                 }
 
                 //Usinar no sentido discordante interno ou externo mais ajuste
                 if (opc_interno.Checked == true && opc_discordante.Checked == true && opc_mais.Checked == true)
                 {
-                    valorX = valorX + compX - diaFresa + ajuste;
+                    valorX = valorX + compX - diaFresa + ajusteUsinagem;
                     text_codigo.Text += "G1 X " + Round(valorX, 4) + " Y " + Round(valorY, 4) + " F " + avanco + Environment.NewLine;
 
-                    valorY = valorY + alturaY - diaFresa + ajuste;
+                    valorY = valorY + alturaY - diaFresa + ajusteUsinagem;
                     text_codigo.Text += "G1 X " + Round(valorX, 4) + " Y " + Round(valorY, 4) + Environment.NewLine;
 
-                    valorX = valorX - compX + diaFresa - ajuste;
+                    valorX = valorX - compX + diaFresa - ajusteUsinagem;
                     text_codigo.Text += "G1 X " + Round(valorX, 4) + " Y " + Round(valorY, 4) + Environment.NewLine;
 
-                    valorY = valorY - alturaY + diaFresa - ajuste;
+                    valorY = valorY - alturaY + diaFresa - ajusteUsinagem;
                     text_codigo.Text += "G1 X " + Round(valorX, 4) + " Y " + Round(valorY, 4) + Environment.NewLine;
 
                 }
                 if (opc_externo.Checked == true && opc_discordante.Checked == true && opc_mais.Checked == true)
                 {
-                    valorX = valorX + compX + diaFresa - ajuste;
+                    valorX = valorX + compX + diaFresa - ajusteUsinagem;
                     text_codigo.Text += "G1 X " + Round(valorX, 4) + " Y " + Round(valorY, 4) + " F " + avanco + Environment.NewLine;
 
-                    valorY = valorY + alturaY + diaFresa - ajuste;
+                    valorY = valorY + alturaY + diaFresa - ajusteUsinagem;
                     text_codigo.Text += "G1 X " + Round(valorX, 4) + " Y " + Round(valorY, 4) + Environment.NewLine;
 
-                    valorX = valorX - compX - diaFresa + ajuste;
+                    valorX = valorX - compX - diaFresa + ajusteUsinagem;
                     text_codigo.Text += "G1 X " + Round(valorX, 4) + " Y " + Round(valorY, 4) + Environment.NewLine;
 
-                    valorY = valorY - alturaY - diaFresa + ajuste;
+                    valorY = valorY - alturaY - diaFresa + ajusteUsinagem;
                     text_codigo.Text += "G1 X " + Round(valorX, 4) + " Y " + Round(valorY, 4) + Environment.NewLine;
                 }
                 
                 //Usinar no sentido discordante interno ou externo menos ajuste
                 if (opc_interno.Checked == true && opc_discordante.Checked == true && opc_menos.Checked == true)
                 {
-                    valorX = valorX + compX - diaFresa - ajuste;
+                    valorX = valorX + compX - diaFresa - ajusteUsinagem;
                     text_codigo.Text += "G1 X " + Round(valorX, 4) + " Y " + Round(valorY, 4) + " F " + avanco + Environment.NewLine;
 
-                    valorY = valorY + alturaY - diaFresa - ajuste;
+                    valorY = valorY + alturaY - diaFresa - ajusteUsinagem;
                     text_codigo.Text += "G1 X " + Round(valorX, 4) + " Y " + Round(valorY, 4) + Environment.NewLine;
 
-                    valorX = valorX - compX + diaFresa + ajuste;
+                    valorX = valorX - compX + diaFresa + ajusteUsinagem;
                     text_codigo.Text += "G1 X " + Round(valorX, 4) + " Y " + Round(valorY, 4) + Environment.NewLine;
 
-                    valorY = valorY - alturaY + diaFresa + ajuste;
+                    valorY = valorY - alturaY + diaFresa + ajusteUsinagem;
                     text_codigo.Text += "G1 X " + Round(valorX, 4) + " Y " + Round(valorY, 4) + Environment.NewLine;
 
                 }
                 if (opc_externo.Checked == true && opc_discordante.Checked == true && opc_menos.Checked == true)
                 {
-                    valorX = valorX + compX + diaFresa + ajuste;
+                    valorX = valorX + compX + diaFresa + ajusteUsinagem;
                     text_codigo.Text += "G1 X " + Round(valorX, 4) + " Y " + Round(valorY, 4) + " F " + avanco + Environment.NewLine;
 
-                    valorY = valorY + alturaY + diaFresa + ajuste;
+                    valorY = valorY + alturaY + diaFresa + ajusteUsinagem;
                     text_codigo.Text += "G1 X " + Round(valorX, 4) + " Y " + Round(valorY, 4) + Environment.NewLine;
 
-                    valorX = valorX - compX - diaFresa - ajuste;
+                    valorX = valorX - compX - diaFresa - ajusteUsinagem;
                     text_codigo.Text += "G1 X " + Round(valorX, 4) + " Y " + Round(valorY, 4) + Environment.NewLine;
 
-                    valorY = valorY - alturaY - diaFresa - ajuste;
+                    valorY = valorY - alturaY - diaFresa - ajusteUsinagem;
                     text_codigo.Text += "G1 X " + Round(valorX, 4) + " Y " + Round(valorY, 4) + Environment.NewLine;
                 }
             }
