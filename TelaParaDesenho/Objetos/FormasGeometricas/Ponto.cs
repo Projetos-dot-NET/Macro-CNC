@@ -24,7 +24,7 @@ namespace TelaParaDesenho.Objetos.FormasGeometricas
 
         public double MedirRaio()
         {
-            return Sqrt(Abs(Pow(X, 2) + Pow(Y, 2)));
+            return Sqrt(Pow(X, 2) + Pow(Y, 2));
         }
 
         public void GirarDaOrigem(double anguloDeGiro)
@@ -35,16 +35,15 @@ namespace TelaParaDesenho.Objetos.FormasGeometricas
 
             //cartesiano pra polar
             // a = acos (x/r) ou
-            // a = asin (x/r)
+            // a = asin (y/r) ou
+            // a - atan (y/x)
 
-            var radianosDeGiro = anguloDeGiro * (Math.PI / 180);
+            var raio = MedirRaio();
+            var radianoDeGiro = anguloDeGiro * (PI / 180.0F);
+            var radiano = Atan(Y / X);
 
-            var teste1 = Asin(Y / MedirRaio());
-            var teste2 = Acos(X / MedirRaio());
-
-
-            Y = MedirRaio() * Sin(teste1 + radianosDeGiro); 
-            X = MedirRaio() * Cos(teste2 + radianosDeGiro);
+            Y = raio * Sin(radiano + radianoDeGiro); 
+            X = raio * Cos(radiano + radianoDeGiro);
         }
     }
 }
