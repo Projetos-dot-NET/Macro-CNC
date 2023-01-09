@@ -37,6 +37,21 @@ namespace Furos
             InitializeComponent();
         }
 
+        private void desenhaUCS()
+        {
+            Graphics g = Picture_Tela.CreateGraphics();
+            Pen canela_Amarelo = new Pen(Color.Yellow, 1);
+
+            PointF pnt1 = new PointF(20.0F, 590.0F);
+            PointF pnt2 = new PointF(20.0F, 540.0F);
+            g.DrawLine(canela_Amarelo, pnt1, pnt2);
+
+            PointF pnt3 = new PointF(10.0F, 580.0F);
+            PointF pnt4 = new PointF(60.0F, 580.0F);
+            g.DrawLine(canela_Amarelo, pnt3, pnt4);
+
+        }
+
         private void Escreve_cabecalho()
         {
             //Cabeçalho
@@ -272,10 +287,16 @@ namespace Furos
             decimal local_x = Convert.ToDecimal(text_x.Text);
             decimal local_y = Convert.ToDecimal(text_y.Text);
             double giro = 0;
-
+            
             Graphics g = Picture_Tela.CreateGraphics();
             Pen canela_Amarelo = new Pen(Color.Yellow, 1);
             Brush Black = new SolidBrush(Color.Black);
+            float[] dashValues = { 5, 5 };// 2, 15, 4 };
+            Pen canela_branco = new Pen(Color.White, 1);
+            
+            PointF pnt1 = new PointF(20.0F, 580.0F);
+            
+
             
             g.FillRectangle(Black , 0, 0, 600, 600);
 
@@ -287,18 +308,26 @@ namespace Furos
             AngFim = 360+giro;
 
             f = AngIni;
+
             while (f < AngFim)
             {
-                {
-                    X1 = X + Convert.ToDecimal(Math.Cos(f * Math.PI / 180)) * raio;
-                    Y1 = Y + Convert.ToDecimal(Math.Sin((180 - f) * Math.PI / 180)) * raio;
-                    list_brocas.Items.Add(" X" + Math.Round(X1, 4) + " Y" + Math.Round(Y1, 4));
 
-                    g.DrawEllipse(canela_Amarelo, (float)local_x + (float)X1 - (float)raio_furo, (float)local_y + (float)Y1 - (float)raio_furo, 2 * (float)raio_furo, 2*(float)raio_furo);   
-                }
+                X1 = X + Convert.ToDecimal(Math.Cos(f * Math.PI / 180)) * raio;
+                Y1 = Y + Convert.ToDecimal(Math.Sin((180 - f) * Math.PI / 180)) * raio;
+                list_brocas.Items.Add(" X" + Math.Round(X1, 4) + " Y" + Math.Round(Y1, 4));
+
+                g.DrawEllipse(canela_Amarelo, 20 + ((float)local_x + (float)X1 - (float)raio_furo), 570 - ((float)local_y + (float)Y1 - (float)raio_furo), 2 * (float)raio_furo, 2 * (float)raio_furo);
+
+                float pontoX = 20 + ((float)local_x + (float)X1);
+                float pontoY = 570 - ((float)local_y + (float)Y1) + 2 * (float)raio_furo;
+
+                PointF pnt2 = new PointF(pontoX, pontoY);
+                canela_branco.DashPattern = dashValues;
+                if (f == AngIni) g.DrawLine(canela_branco, pnt1, pnt2);
+
                 f += n_furos;
             }
-            button3_Click(null, null);
+            desenhaUCS();
         }
 
         private void button9_Click(object sender, EventArgs e)
@@ -318,10 +347,7 @@ namespace Furos
         private void button3_Click(object sender, EventArgs e)
         {
             Graphics g = Picture_Tela.CreateGraphics();
-            //Brush P_Azul = new SolidBrush(Color.Blue);
             Pen canela_Amarelo = new Pen (Color.Yellow,1);
-            //g.FillRectangle(Pincel, 10, 10, 50, 50);
-            //g.FillEllipse(Pincel, 80, 80, 50, 30);
             
             PointF pnt1 = new PointF(10.0F, 10.0F);
             PointF pnt2 = new PointF(590.0F, 10.0F);

@@ -842,6 +842,8 @@
             // Picture_Tela
             // 
             this.Picture_Tela.BackColor = System.Drawing.Color.Black;
+            this.Picture_Tela.ErrorImage = null;
+            this.Picture_Tela.InitialImage = null;
             this.Picture_Tela.Location = new System.Drawing.Point(604, 42);
             this.Picture_Tela.Name = "Picture_Tela";
             this.Picture_Tela.Size = new System.Drawing.Size(600, 600);
