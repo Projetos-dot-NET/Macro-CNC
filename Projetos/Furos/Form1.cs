@@ -39,16 +39,48 @@ namespace Furos
 
         private void desenhaUCS()
         {
-            Graphics g = Picture_Tela.CreateGraphics();
-            Pen canela_Amarelo = new Pen(Color.Yellow, 1);
+            decimal ucsX = Convert.ToDecimal(text_x.Text);
+            decimal ucsY = Convert.ToDecimal(text_y.Text);
 
-            PointF pnt1 = new PointF(20.0F, 590.0F);
-            PointF pnt2 = new PointF(20.0F, 540.0F);
-            g.DrawLine(canela_Amarelo, pnt1, pnt2);
+            if (ucsX == 0 && ucsY == 0)
+            {
+                Graphics g = Picture_Tela.CreateGraphics();
+                Pen canela_Amarelo = new Pen(Color.Yellow, 1);
 
-            PointF pnt3 = new PointF(10.0F, 580.0F);
-            PointF pnt4 = new PointF(60.0F, 580.0F);
-            g.DrawLine(canela_Amarelo, pnt3, pnt4);
+                PointF pnt1 = new PointF(280.0F, 300.0F);
+                PointF pnt2 = new PointF(320.0F, 300.0F);
+                g.DrawLine(canela_Amarelo, pnt1, pnt2);
+
+                PointF pnt3 = new PointF(300.0F, 280.0F);
+                PointF pnt4 = new PointF(300.0F, 320.0F);
+                g.DrawLine(canela_Amarelo, pnt3, pnt4);
+            }
+            if (ucsX >= 0 && ucsY >= 0)
+            {
+                Graphics g = Picture_Tela.CreateGraphics();
+                Pen canela_Amarelo = new Pen(Color.Yellow, 1);
+
+                PointF pnt1 = new PointF(20.0F, 590.0F);
+                PointF pnt2 = new PointF(20.0F, 540.0F);
+                g.DrawLine(canela_Amarelo, pnt1, pnt2);
+
+                PointF pnt3 = new PointF(10.0F, 580.0F);
+                PointF pnt4 = new PointF(60.0F, 580.0F);
+                g.DrawLine(canela_Amarelo, pnt3, pnt4);
+            }
+            if (ucsX >= 0 && ucsY < 0)
+            {
+                Graphics g = Picture_Tela.CreateGraphics();
+                Pen canela_Amarelo = new Pen(Color.Yellow, 1);
+
+                PointF pnt1 = new PointF(20.0F, 10.0F);
+                PointF pnt2 = new PointF(20.0F, 60.0F);
+                g.DrawLine(canela_Amarelo, pnt1, pnt2);
+
+                PointF pnt3 = new PointF(10.0F, 20.0F);
+                PointF pnt4 = new PointF(60.0F, 20.0F);
+                g.DrawLine(canela_Amarelo, pnt3, pnt4);
+            }
 
         }
 
@@ -57,22 +89,24 @@ namespace Furos
             //Cabeçalho
             text_comando.Text = "G17 G21 G90 (Plano XY - metrico - absoluto)" + Environment.NewLine;
             z = Convert.ToDecimal(text_Z_troca.Text);
-            text_comando.Text = text_comando.Text + "G0 Z" + Math.Round(z, 4) + " (Z para troca de ferramenta )" + Environment.NewLine;
-            text_comando.Text = text_comando.Text + "G0 X0.000 Y0.000 (zero peca)" + Environment.NewLine;
-            text_comando.Text = text_comando.Text + "S12000 (velocidade spidle)" + Environment.NewLine;
-            text_comando.Text = text_comando.Text + "M0 (broca de " + text_dia_f.Text + "mm, troca manual)" + Environment.NewLine;
-            text_comando.Text = text_comando.Text + "M3 (liga spindle)" + Environment.NewLine;
-            text_comando.Text = text_comando.Text + "G4 P3.000 (pausa por 3 segundos)" + Environment.NewLine;
+            text_comando.Text = text_comando.Text + "G00 Z" + Math.Round(z, 4) + " (Z para troca de ferramenta )" + Environment.NewLine;
+            text_comando.Text = text_comando.Text + "G00 X0.000 Y0.000 (zero peca)" + Environment.NewLine;
+            
+            //text_comando.Text = text_comando.Text + "S " + rpm + " (velocidade spidle)" + Environment.NewLine;
+            text_comando.Text = text_comando.Text + "M00 (broca de " + text_dia_f.Text + "mm, troca manual)" + Environment.NewLine;
+            string rpm = text_rpm.Text;
+            text_comando.Text = text_comando.Text + "M03 S" + rpm + " (liga spindle)" + Environment.NewLine;
+            text_comando.Text = text_comando.Text + "G04 P3.000 (pausa por 3 segundos)" + Environment.NewLine;
             z = Convert.ToDecimal(text_seg.Text);
-            text_comando.Text = text_comando.Text + "G0 Z" + Math.Round(z, 4) + " (Aproximacao)" + Environment.NewLine;
+            text_comando.Text = text_comando.Text + "G00 Z" + Math.Round(z, 4) + " (Aproximacao)" + Environment.NewLine;
         }
 
         private void Escreve_rodape()
         {
             //Rodapé
             z = 25;
-            text_comando.Text = text_comando.Text + "G0 X0.000 Y0.000 Z" + z + Environment.NewLine;
-            text_comando.Text = text_comando.Text + "M5" + Environment.NewLine;
+            text_comando.Text = text_comando.Text + "G00 X0.000 Y0.000 Z" + z + Environment.NewLine;
+            text_comando.Text = text_comando.Text + "M05" + Environment.NewLine;
             text_comando.Text = text_comando.Text + "M30" + Environment.NewLine;
             text_comando.Text = text_comando.Text.Replace(",", ".");
         }
@@ -287,17 +321,24 @@ namespace Furos
             decimal local_x = Convert.ToDecimal(text_x.Text);
             decimal local_y = Convert.ToDecimal(text_y.Text);
             double giro = 0;
-            
-            Graphics g = Picture_Tela.CreateGraphics();
-            Pen canela_Amarelo = new Pen(Color.Yellow, 1);
-            Brush Black = new SolidBrush(Color.Black);
-            float[] dashValues = { 5, 5 };// 2, 15, 4 };
-            Pen canela_branco = new Pen(Color.White, 1);
-            
-            PointF pnt1 = new PointF(20.0F, 580.0F);
-            
 
+            //float[] ponto1 = { 100, 2 };
+            //float[] ponto2 = { 100, 2 };
+
+            Graphics g = Picture_Tela.CreateGraphics();
+            Pen caneta_Amarelo = new Pen(Color.Yellow, 1);
+            Pen caneta_Vermelho = new Pen(Color.Red, 1);
+            Brush Black = new SolidBrush(Color.Black);
             
+            float[] dashValues = { 5, 5 };// 2, 15, 4 };
+            
+            Pen caneta_Branco = new Pen(Color.White, 1);
+
+            //var ponto1 = new List<PointF>() { new PointF(100, 2)};
+
+            var ponto1 = new PointF(20.0F, 580.0F);
+            var ponto2 = new PointF( );
+
             g.FillRectangle(Black , 0, 0, 600, 600);
 
             list_brocas.Items.Clear();
@@ -311,22 +352,40 @@ namespace Furos
 
             while (f < AngFim)
             {
-
                 X1 = X + Convert.ToDecimal(Math.Cos(f * Math.PI / 180)) * raio;
                 Y1 = Y + Convert.ToDecimal(Math.Sin((180 - f) * Math.PI / 180)) * raio;
                 list_brocas.Items.Add(" X" + Math.Round(X1, 4) + " Y" + Math.Round(Y1, 4));
 
-                g.DrawEllipse(canela_Amarelo, 20 + ((float)local_x + (float)X1 - (float)raio_furo), 570 - ((float)local_y + (float)Y1 - (float)raio_furo), 2 * (float)raio_furo, 2 * (float)raio_furo);
+                float pontoX = 20 + ((float)local_x + (float)X1 - (float)raio_furo);
+                float pontoY = 570 - ((float)local_y + (float)Y1 - (float)raio_furo);
 
-                float pontoX = 20 + ((float)local_x + (float)X1);
-                float pontoY = 570 - ((float)local_y + (float)Y1) + 2 * (float)raio_furo;
 
-                PointF pnt2 = new PointF(pontoX, pontoY);
-                canela_branco.DashPattern = dashValues;
-                if (f == AngIni) g.DrawLine(canela_branco, pnt1, pnt2);
+                g.DrawEllipse(caneta_Amarelo, pontoX, pontoY, 2 * (float)raio_furo, 2 * (float)raio_furo);
 
+                pontoX = 20 + ((float)local_x + (float)X1);
+                pontoY = 570 - ((float)local_y + (float)Y1) + 2 * (float)raio_furo;
+
+                ponto2.X = pontoX;
+                ponto2.Y = pontoY;
+
+                caneta_Branco.DashPattern = dashValues;
+                caneta_Vermelho.DashPattern = dashValues;
+
+                if (f == AngIni)
+                {
+                    g.DrawLine(caneta_Vermelho, ponto1, ponto2);
+                }
+                else
+                {
+                    g.DrawLine(caneta_Branco, ponto1, ponto2);
+                }
+                ponto1 = ponto2;
                 f += n_furos;
             }
+            
+            ponto2.X = 20.0F;
+            ponto2.Y = 580.0F;
+            g.DrawLine(caneta_Branco, ponto1, ponto2);
             desenhaUCS();
         }
 
@@ -369,6 +428,14 @@ namespace Furos
         private void check_girar_CheckedChanged(object sender, EventArgs e)
         {
             button5_Click(null, null);
+        }
+
+        private void button10_Click(object sender, EventArgs e)
+        {
+            String nome = "x2 y34";
+            nome = nome.ToUpper();
+            nome = nome.Replace(" ", "");
+            MessageBox.Show((nome.Split('X')[1].Split('Y')[0] + ", " + nome.Split('Y')[1]), "Atenção");
         }
     }
 }
