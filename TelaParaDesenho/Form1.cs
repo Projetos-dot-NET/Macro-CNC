@@ -34,5 +34,15 @@ namespace TelaParaDesenho
             grafico.DrawLine(canela_Amarelo, infEsq, infDir);
             grafico.DrawLine(canela_Amarelo, infDir, supDir);
         }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void sistemaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
