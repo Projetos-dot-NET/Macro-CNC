@@ -35,12 +35,12 @@ namespace TelaParaDesenho
             grafico.DrawLine(canela_Amarelo, infDir, supDir);
         }
 
-        private void label2_Click(object sender, EventArgs e)
+        private void Form1_Load(object sender, EventArgs e)
         {
 
         }
 
-        private void sistemaToolStripMenuItem_Click(object sender, EventArgs e)
+        private void anguloBox_TextChanged(object sender, EventArgs e)
         {
 
         }

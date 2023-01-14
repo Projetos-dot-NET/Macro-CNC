@@ -48,6 +48,14 @@
             this.desbasteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.brocasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mmToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tipoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.nºFerramentaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.diametroToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.passoLateralToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.passoVerticalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.rpmToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.avançoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.taxaDeMergulhoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mmToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.mmToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.mmToolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
@@ -59,14 +67,6 @@
             this.uretanoDeAltaDensidadeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.polegadaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.tipoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.nºFerramentaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.diametroToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.passoLateralToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.passoVerticalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.rpmToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.avançoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.taxaDeMergulhoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -122,6 +122,7 @@
             this.anguloBox.Size = new System.Drawing.Size(63, 23);
             this.anguloBox.TabIndex = 7;
             this.anguloBox.Text = "0";
+            this.anguloBox.TextChanged += new System.EventHandler(this.anguloBox_TextChanged);
             // 
             // label3
             // 
@@ -175,7 +176,6 @@
             this.sistemaToolStripMenuItem.Name = "sistemaToolStripMenuItem";
             this.sistemaToolStripMenuItem.Size = new System.Drawing.Size(60, 20);
             this.sistemaToolStripMenuItem.Text = "Sistema";
-            this.sistemaToolStripMenuItem.Click += new System.EventHandler(this.sistemaToolStripMenuItem_Click);
             // 
             // metricoToolStripMenuItem1
             // 
@@ -185,7 +185,7 @@
             this.madeiraEPlasticosToolStripMenuItem,
             this.uretanoDeAltaDensidadeToolStripMenuItem});
             this.metricoToolStripMenuItem1.Name = "metricoToolStripMenuItem1";
-            this.metricoToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.metricoToolStripMenuItem1.Size = new System.Drawing.Size(123, 22);
             this.metricoToolStripMenuItem1.Text = "Metrico";
             // 
             // açoToolStripMenuItem
@@ -215,7 +215,7 @@
             this.brocasToolStripMenuItem,
             this.fresasToolStripMenuItem});
             this.desbasteToolStripMenuItem.Name = "desbasteToolStripMenuItem";
-            this.desbasteToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.desbasteToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
             this.desbasteToolStripMenuItem.Text = "Desbaste";
             // 
             // brocasToolStripMenuItem
@@ -229,7 +229,7 @@
             this.mmToolStripMenuItem5,
             this.mmToolStripMenuItem6});
             this.brocasToolStripMenuItem.Name = "brocasToolStripMenuItem";
-            this.brocasToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.brocasToolStripMenuItem.Size = new System.Drawing.Size(109, 22);
             this.brocasToolStripMenuItem.Text = "Brocas";
             // 
             // mmToolStripMenuItem
@@ -246,71 +246,6 @@
             this.mmToolStripMenuItem.Name = "mmToolStripMenuItem";
             this.mmToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
             this.mmToolStripMenuItem.Text = "12mm";
-            // 
-            // mmToolStripMenuItem1
-            // 
-            this.mmToolStripMenuItem1.Name = "mmToolStripMenuItem1";
-            this.mmToolStripMenuItem1.Size = new System.Drawing.Size(123, 22);
-            this.mmToolStripMenuItem1.Text = "10mm";
-            // 
-            // mmToolStripMenuItem2
-            // 
-            this.mmToolStripMenuItem2.Name = "mmToolStripMenuItem2";
-            this.mmToolStripMenuItem2.Size = new System.Drawing.Size(123, 22);
-            this.mmToolStripMenuItem2.Text = "8mm";
-            // 
-            // mmToolStripMenuItem3
-            // 
-            this.mmToolStripMenuItem3.Name = "mmToolStripMenuItem3";
-            this.mmToolStripMenuItem3.Size = new System.Drawing.Size(123, 22);
-            this.mmToolStripMenuItem3.Text = "6mm";
-            // 
-            // mmToolStripMenuItem4
-            // 
-            this.mmToolStripMenuItem4.Name = "mmToolStripMenuItem4";
-            this.mmToolStripMenuItem4.Size = new System.Drawing.Size(123, 22);
-            this.mmToolStripMenuItem4.Text = "5mm";
-            // 
-            // mmToolStripMenuItem5
-            // 
-            this.mmToolStripMenuItem5.Name = "mmToolStripMenuItem5";
-            this.mmToolStripMenuItem5.Size = new System.Drawing.Size(123, 22);
-            this.mmToolStripMenuItem5.Text = "3.175mm";
-            // 
-            // mmToolStripMenuItem6
-            // 
-            this.mmToolStripMenuItem6.Name = "mmToolStripMenuItem6";
-            this.mmToolStripMenuItem6.Size = new System.Drawing.Size(123, 22);
-            this.mmToolStripMenuItem6.Text = "2mm";
-            // 
-            // fresasToolStripMenuItem
-            // 
-            this.fresasToolStripMenuItem.Name = "fresasToolStripMenuItem";
-            this.fresasToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.fresasToolStripMenuItem.Text = "Fresas";
-            // 
-            // acabamentoToolStripMenuItem
-            // 
-            this.acabamentoToolStripMenuItem.Name = "acabamentoToolStripMenuItem";
-            this.acabamentoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.acabamentoToolStripMenuItem.Text = "Acabamento";
-            // 
-            // uretanoDeAltaDensidadeToolStripMenuItem
-            // 
-            this.uretanoDeAltaDensidadeToolStripMenuItem.Name = "uretanoDeAltaDensidadeToolStripMenuItem";
-            this.uretanoDeAltaDensidadeToolStripMenuItem.Size = new System.Drawing.Size(211, 22);
-            this.uretanoDeAltaDensidadeToolStripMenuItem.Text = "Uretano de alta densidade";
-            // 
-            // polegadaToolStripMenuItem
-            // 
-            this.polegadaToolStripMenuItem.Name = "polegadaToolStripMenuItem";
-            this.polegadaToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.polegadaToolStripMenuItem.Text = "Polegada";
-            // 
-            // contextMenuStrip1
-            // 
-            this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
             // 
             // tipoToolStripMenuItem
             // 
@@ -360,6 +295,71 @@
             this.taxaDeMergulhoToolStripMenuItem.Size = new System.Drawing.Size(168, 22);
             this.taxaDeMergulhoToolStripMenuItem.Text = "Taxa de mergulho";
             // 
+            // mmToolStripMenuItem1
+            // 
+            this.mmToolStripMenuItem1.Name = "mmToolStripMenuItem1";
+            this.mmToolStripMenuItem1.Size = new System.Drawing.Size(123, 22);
+            this.mmToolStripMenuItem1.Text = "10mm";
+            // 
+            // mmToolStripMenuItem2
+            // 
+            this.mmToolStripMenuItem2.Name = "mmToolStripMenuItem2";
+            this.mmToolStripMenuItem2.Size = new System.Drawing.Size(123, 22);
+            this.mmToolStripMenuItem2.Text = "8mm";
+            // 
+            // mmToolStripMenuItem3
+            // 
+            this.mmToolStripMenuItem3.Name = "mmToolStripMenuItem3";
+            this.mmToolStripMenuItem3.Size = new System.Drawing.Size(123, 22);
+            this.mmToolStripMenuItem3.Text = "6mm";
+            // 
+            // mmToolStripMenuItem4
+            // 
+            this.mmToolStripMenuItem4.Name = "mmToolStripMenuItem4";
+            this.mmToolStripMenuItem4.Size = new System.Drawing.Size(123, 22);
+            this.mmToolStripMenuItem4.Text = "5mm";
+            // 
+            // mmToolStripMenuItem5
+            // 
+            this.mmToolStripMenuItem5.Name = "mmToolStripMenuItem5";
+            this.mmToolStripMenuItem5.Size = new System.Drawing.Size(123, 22);
+            this.mmToolStripMenuItem5.Text = "3.175mm";
+            // 
+            // mmToolStripMenuItem6
+            // 
+            this.mmToolStripMenuItem6.Name = "mmToolStripMenuItem6";
+            this.mmToolStripMenuItem6.Size = new System.Drawing.Size(123, 22);
+            this.mmToolStripMenuItem6.Text = "2mm";
+            // 
+            // fresasToolStripMenuItem
+            // 
+            this.fresasToolStripMenuItem.Name = "fresasToolStripMenuItem";
+            this.fresasToolStripMenuItem.Size = new System.Drawing.Size(109, 22);
+            this.fresasToolStripMenuItem.Text = "Fresas";
+            // 
+            // acabamentoToolStripMenuItem
+            // 
+            this.acabamentoToolStripMenuItem.Name = "acabamentoToolStripMenuItem";
+            this.acabamentoToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
+            this.acabamentoToolStripMenuItem.Text = "Acabamento";
+            // 
+            // uretanoDeAltaDensidadeToolStripMenuItem
+            // 
+            this.uretanoDeAltaDensidadeToolStripMenuItem.Name = "uretanoDeAltaDensidadeToolStripMenuItem";
+            this.uretanoDeAltaDensidadeToolStripMenuItem.Size = new System.Drawing.Size(211, 22);
+            this.uretanoDeAltaDensidadeToolStripMenuItem.Text = "Uretano de alta densidade";
+            // 
+            // polegadaToolStripMenuItem
+            // 
+            this.polegadaToolStripMenuItem.Name = "polegadaToolStripMenuItem";
+            this.polegadaToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
+            this.polegadaToolStripMenuItem.Text = "Polegada";
+            // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -379,6 +379,7 @@
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Form1";
             this.Text = "Form1";
+            this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
