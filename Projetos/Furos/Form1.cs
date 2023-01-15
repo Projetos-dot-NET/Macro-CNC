@@ -557,7 +557,7 @@ namespace Furos
             var MatrizCircular = new MatrizCircular(text_raio.Text, text_quant.Text, text_graus.Text);
 
             double raio = MatrizCircular.Raio ;
-            double n_furos = 360 / MatrizCircular.NumeroFuros ;
+            double n_furos = Convert.ToDouble(360 / MatrizCircular.NumeroFuros);
 
             double f;
 
@@ -566,7 +566,7 @@ namespace Furos
             list_brocas.Items.Clear();
             list_aux.Items.Clear();
 
-            if (check_girar.Checked == true) giro = 360 / 4;
+            //if (check_girar.Checked == true) giro = 360 / 4;
 
             AngIni = giro;
             AngFim = 360 + giro;
@@ -595,12 +595,6 @@ namespace Furos
                 desenhaUCS();
                 Desenha_Percurso();
             }
-        }
-
-
-        private void check_girar_CheckedChanged(object sender, EventArgs e)
-        {
-            button5_Click(null, null);
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -728,6 +722,32 @@ namespace Furos
         private void text_quant_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void button12_Click(object sender, EventArgs e)
+        {
+            double GrausFuros = Convert.ToDouble(text_graus.Text);
+            double numeroFuros = Convert.ToDouble(text_quant.Text);
+            double menorGrau = 360 / numeroFuros / 4;
+            if (opt_A.Checked == true)
+            {
+                if(menorGrau<360)GrausFuros += menorGrau;
+                if (GrausFuros <= 360)
+                    text_graus.Text = Convert.ToString(Math.Round(GrausFuros, 4));
+                else
+                    text_graus.Text = "0";
+            }
+            else
+            {
+                if(menorGrau>0)GrausFuros -= menorGrau;
+                if (Convert.ToInt16(menorGrau) == 0) GrausFuros = 0;
+                if (GrausFuros >= 0)
+                    text_graus.Text = Convert.ToString(Math.Round(GrausFuros,14));
+                else
+                    text_graus.Text = "360";
+            }
+            //button5_Click(null, null);
+            
         }
     }
     

@@ -98,7 +98,9 @@ namespace Furos
             this.label13 = new System.Windows.Forms.Label();
             this.pictureBox12 = new System.Windows.Forms.PictureBox();
             this.groupBox7 = new System.Windows.Forms.GroupBox();
-            this.check_girar = new System.Windows.Forms.CheckBox();
+            this.button12 = new System.Windows.Forms.Button();
+            this.label18 = new System.Windows.Forms.Label();
+            this.text_graus = new System.Windows.Forms.TextBox();
             this.button5 = new System.Windows.Forms.Button();
             this.trackBar1 = new System.Windows.Forms.TrackBar();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -106,9 +108,8 @@ namespace Furos
             this.button3 = new System.Windows.Forms.Button();
             this.button11 = new System.Windows.Forms.Button();
             this.button10 = new System.Windows.Forms.Button();
-            this.label18 = new System.Windows.Forms.Label();
-            this.text_graus = new System.Windows.Forms.TextBox();
-            this.button12 = new System.Windows.Forms.Button();
+            this.opt_A = new System.Windows.Forms.RadioButton();
+            this.opt_H = new System.Windows.Forms.RadioButton();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -224,10 +225,10 @@ namespace Furos
             // list_brocas
             // 
             this.list_brocas.FormattingEnabled = true;
-            this.list_brocas.Location = new System.Drawing.Point(149, 13);
+            this.list_brocas.Location = new System.Drawing.Point(131, 13);
             this.list_brocas.Name = "list_brocas";
             this.list_brocas.SelectionMode = System.Windows.Forms.SelectionMode.MultiExtended;
-            this.list_brocas.Size = new System.Drawing.Size(124, 69);
+            this.list_brocas.Size = new System.Drawing.Size(142, 69);
             this.list_brocas.TabIndex = 1;
             this.list_brocas.SelectedIndexChanged += new System.EventHandler(this.list_brocas_SelectedIndexChanged);
             this.list_brocas.KeyDown += new System.Windows.Forms.KeyEventHandler(this.list_brocas_KeyDown);
@@ -249,7 +250,7 @@ namespace Furos
             // 
             // button9
             // 
-            this.button9.Location = new System.Drawing.Point(22, 20);
+            this.button9.Location = new System.Drawing.Point(10, 20);
             this.button9.Name = "button9";
             this.button9.Size = new System.Drawing.Size(87, 22);
             this.button9.TabIndex = 11;
@@ -260,7 +261,7 @@ namespace Furos
             // button8
             // 
             this.button8.Image = ((System.Drawing.Image)(resources.GetObject("button8.Image")));
-            this.button8.Location = new System.Drawing.Point(120, 19);
+            this.button8.Location = new System.Drawing.Point(103, 19);
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(23, 23);
             this.button8.TabIndex = 10;
@@ -270,7 +271,7 @@ namespace Furos
             // button7
             // 
             this.button7.Image = ((System.Drawing.Image)(resources.GetObject("button7.Image")));
-            this.button7.Location = new System.Drawing.Point(120, 48);
+            this.button7.Location = new System.Drawing.Point(103, 48);
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(23, 23);
             this.button7.TabIndex = 9;
@@ -279,7 +280,7 @@ namespace Furos
             // 
             // button6
             // 
-            this.button6.Location = new System.Drawing.Point(22, 60);
+            this.button6.Location = new System.Drawing.Point(10, 60);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(87, 22);
             this.button6.TabIndex = 8;
@@ -524,7 +525,7 @@ namespace Furos
             this.groupBox3.Controls.Add(this.option_82);
             this.groupBox3.Location = new System.Drawing.Point(12, 161);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(125, 141);
+            this.groupBox3.Size = new System.Drawing.Size(119, 141);
             this.groupBox3.TabIndex = 21;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Metodo:";
@@ -837,33 +838,52 @@ namespace Furos
             // 
             // groupBox7
             // 
+            this.groupBox7.Controls.Add(this.opt_H);
+            this.groupBox7.Controls.Add(this.opt_A);
             this.groupBox7.Controls.Add(this.button12);
             this.groupBox7.Controls.Add(this.label18);
             this.groupBox7.Controls.Add(this.text_graus);
-            this.groupBox7.Controls.Add(this.check_girar);
             this.groupBox7.Controls.Add(this.button5);
             this.groupBox7.Controls.Add(this.label13);
             this.groupBox7.Controls.Add(this.text_raio);
             this.groupBox7.Controls.Add(this.label12);
             this.groupBox7.Controls.Add(this.text_quant);
             this.groupBox7.Controls.Add(this.pictureBox12);
-            this.groupBox7.Location = new System.Drawing.Point(142, 161);
+            this.groupBox7.Location = new System.Drawing.Point(133, 161);
             this.groupBox7.Name = "groupBox7";
-            this.groupBox7.Size = new System.Drawing.Size(198, 141);
+            this.groupBox7.Size = new System.Drawing.Size(207, 141);
             this.groupBox7.TabIndex = 25;
             this.groupBox7.TabStop = false;
             this.groupBox7.Text = "Matriz Circular";
             // 
-            // check_girar
+            // button12
             // 
-            this.check_girar.AutoSize = true;
-            this.check_girar.Location = new System.Drawing.Point(71, 85);
-            this.check_girar.Name = "check_girar";
-            this.check_girar.Size = new System.Drawing.Size(78, 17);
-            this.check_girar.TabIndex = 32;
-            this.check_girar.Text = "Rotacionar";
-            this.check_girar.UseVisualStyleBackColor = true;
-            this.check_girar.CheckedChanged += new System.EventHandler(this.check_girar_CheckedChanged);
+            this.button12.Location = new System.Drawing.Point(71, 110);
+            this.button12.Name = "button12";
+            this.button12.Size = new System.Drawing.Size(56, 25);
+            this.button12.TabIndex = 35;
+            this.button12.Text = "&Girar";
+            this.button12.UseVisualStyleBackColor = true;
+            this.button12.Click += new System.EventHandler(this.button12_Click);
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(61, 64);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(75, 13);
+            this.label18.TabIndex = 33;
+            this.label18.Text = "Giro em graus:";
+            this.label18.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // text_graus
+            // 
+            this.text_graus.Location = new System.Drawing.Point(141, 61);
+            this.text_graus.Name = "text_graus";
+            this.text_graus.Size = new System.Drawing.Size(51, 20);
+            this.text_graus.TabIndex = 34;
+            this.text_graus.Text = "0";
+            this.text_graus.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // button5
             // 
@@ -934,33 +954,27 @@ namespace Furos
             this.button10.UseVisualStyleBackColor = true;
             this.button10.Click += new System.EventHandler(this.button10_Click);
             // 
-            // label18
+            // opt_A
             // 
-            this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(61, 64);
-            this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(75, 13);
-            this.label18.TabIndex = 33;
-            this.label18.Text = "Giro em graus:";
-            this.label18.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.opt_A.AutoSize = true;
+            this.opt_A.Checked = true;
+            this.opt_A.Location = new System.Drawing.Point(61, 85);
+            this.opt_A.Name = "opt_A";
+            this.opt_A.Size = new System.Drawing.Size(81, 17);
+            this.opt_A.TabIndex = 36;
+            this.opt_A.TabStop = true;
+            this.opt_A.Text = "Anti_horário";
+            this.opt_A.UseVisualStyleBackColor = true;
             // 
-            // text_graus
+            // opt_H
             // 
-            this.text_graus.Location = new System.Drawing.Point(141, 61);
-            this.text_graus.Name = "text_graus";
-            this.text_graus.Size = new System.Drawing.Size(51, 20);
-            this.text_graus.TabIndex = 34;
-            this.text_graus.Text = "0";
-            this.text_graus.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // button12
-            // 
-            this.button12.Location = new System.Drawing.Point(71, 110);
-            this.button12.Name = "button12";
-            this.button12.Size = new System.Drawing.Size(56, 25);
-            this.button12.TabIndex = 35;
-            this.button12.Text = "&Girar";
-            this.button12.UseVisualStyleBackColor = true;
+            this.opt_H.AutoSize = true;
+            this.opt_H.Location = new System.Drawing.Point(145, 85);
+            this.opt_H.Name = "opt_H";
+            this.opt_H.Size = new System.Drawing.Size(57, 17);
+            this.opt_H.TabIndex = 37;
+            this.opt_H.Text = "horário";
+            this.opt_H.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
@@ -1088,7 +1102,6 @@ namespace Furos
         private System.Windows.Forms.Button button7;
         private System.Windows.Forms.Button button8;
         private System.Windows.Forms.Button button9;
-        private System.Windows.Forms.CheckBox check_girar;
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.TextBox text_rpm;
         private System.Windows.Forms.PictureBox pictureBox15;
@@ -1103,6 +1116,8 @@ namespace Furos
         private Button button12;
         private Label label18;
         private TextBox text_graus;
+        private RadioButton opt_H;
+        private RadioButton opt_A;
     }
 }
 
