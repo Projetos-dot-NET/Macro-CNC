@@ -9,8 +9,8 @@ namespace Furos.Classes
     public class MatrizCircular
     {
         public double Raio { get; set; }
-        public double NumeroFuros { get; set; }
-        public double GrauRotacao { get; set; }
+        public int NumeroFuros { get; set; }
+        public int GrauRotacao { get; set; }
 
         public MatrizCircular() { }
         /*
@@ -24,8 +24,8 @@ namespace Furos.Classes
         public MatrizCircular(string r, string nF, string gR)
         {
             Raio = double.Parse(r);
-            NumeroFuros = double.Parse(nF);
-            GrauRotacao = double.Parse(gR);
+            NumeroFuros = int.Parse(nF);
+            GrauRotacao = int.Parse(gR);
         }
     }
 }
